@@ -34,15 +34,25 @@ jobs:
         run: mvn verify --batch-mode
 
       - name: Run JReleaser
-        id: jreleaser
         uses: jreleaser/release-action@v2
         with:
           setup-java: false
         env:
           JRELEASER_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Check for new release
+        id: check
+        run: |
+          TAG=$(git tag --points-at HEAD)
+          if [ -n "$TAG" ]; then
+            echo "released=true" >> $GITHUB_OUTPUT
+            echo "tag=$TAG" >> $GITHUB_OUTPUT
+          else
+            echo "released=false" >> $GITHUB_OUTPUT
+          fi
+
       - name: Publish to Maven Central
-        if: steps.jreleaser.outputs.release_tag != ''
+        if: steps.check.outputs.released == 'true'
         run: mvn deploy -P deployment --batch-mode
         env:
           SONATYPE_TOKEN_USERNAME: ${{ secrets.SONATYPE_TOKEN_USERNAME }}
@@ -50,9 +60,9 @@ jobs:
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
 
       - name: Bump to next SNAPSHOT
-        if: steps.jreleaser.outputs.release_tag != ''
+        if: steps.check.outputs.released == 'true'
         run: |
-          TAG="${{ steps.jreleaser.outputs.release_tag }}"
+          TAG="${{ steps.check.outputs.tag }}"
           NEW_VERSION="${TAG#v}"
           MAJOR=$(echo "$NEW_VERSION" | cut -d. -f1)
           MINOR=$(echo "$NEW_VERSION" | cut -d. -f2)
