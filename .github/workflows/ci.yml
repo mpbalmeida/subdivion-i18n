@@ -29,8 +29,9 @@ jobs:
           gpg-passphrase: GPG_PASSPHRASE
 
       - name: Verify commit message
+        if: github.event_name == 'pull_request'
         run: |
-          COMMIT="${{ github.event.pull_request.head.sha || github.sha }}"
+          COMMIT="${{ github.event.pull_request.head.sha }}"
           git log -1 --pretty=format:"%s" "$COMMIT" > latest_commit_msg.txt
           ./scripts/commit-msg.sh latest_commit_msg.txt
 
@@ -47,12 +48,13 @@ jobs:
           MAJOR=0; MINOR=0; PATCH=0
           while IFS= read -r commit; do
             case "$commit" in
-              *BREAKING\ CHANGE*|*break!\(*\):*) MAJOR=$((MAJOR + 1)) ;;
-              feat!\(*\):*) MAJOR=$((MAJOR + 1)) ;;
-              feat*)               MINOR=$((MINOR + 1)) ;;
-              fix*)                PATCH=$((PATCH + 1)) ;;
+              *"BREAKING CHANGE"*|*feat!\(*\):*) MAJOR=$((MAJOR + 1)) ;;
+              feat*)                                MINOR=$((MINOR + 1)) ;;
+              fix*)                                 PATCH=$((PATCH + 1)) ;;
             esac
-          done < <(git log --pretty=format:"%s" "${LAST_TAG}..${{ github.event.pull_request.head.sha }}" 2>/dev/null)
+          done < <(git log --no-merges --pretty=format:"%s" "${LAST_TAG}..${{ github.event.pull_request.head.sha }}")
+
+          echo "Counts: MAJOR=$MAJOR MINOR=$MINOR PATCH=$PATCH"
 
           PREV="${LAST_TAG#v}"
           PV_MAJOR=$(echo "$PREV" | cut -d. -f1)
