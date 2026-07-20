@@ -1,0 +1,8 @@
+{
+  "country": "US",
+  "name": "United States",
+  "subdivisions": [
+    {"code": "AL", "name": "Alabama", "category": "State"},
+    {"code": "AK", "name": "Alaska", "category": "State"}
+  ]
+}

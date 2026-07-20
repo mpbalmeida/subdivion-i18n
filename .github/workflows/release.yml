@@ -35,7 +35,7 @@ jobs:
           LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
           if [ -z "$LAST_TAG" ]; then
             echo "No tags found, using pom.xml version as base"
-            LAST_TAG="v$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout | sed 's/-SNAPSHOT//')"
+            LAST_TAG="v$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout -pl library | sed 's/-SNAPSHOT//')"
             RANGE="HEAD"
           else
             RANGE="${LAST_TAG}..HEAD"
@@ -98,7 +98,9 @@ jobs:
 
       - name: Publish to Maven Central
         if: steps.version.outputs.skip != 'true'
-        run: mvn deploy -P deployment --batch-mode
+        run: |
+          mvn install --batch-mode
+          mvn deploy -P deployment --batch-mode -pl library
         env:
           SONATYPE_TOKEN_USERNAME: ${{ secrets.SONATYPE_TOKEN_USERNAME }}
           SONATYPE_TOKEN_PASSWORD: ${{ secrets.SONATYPE_TOKEN_PASSWORD }}

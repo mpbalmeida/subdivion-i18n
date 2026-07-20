@@ -1,0 +1,19 @@
+{
+  "country": "CA",
+  "name": "Canada",
+  "subdivisions": [
+    {"code": "AB", "name": "Alberta", "category": "Province"},
+    {"code": "BC", "name": "British Columbia", "category": "Province"},
+    {"code": "MB", "name": "Manitoba", "category": "Province"},
+    {"code": "NB", "name": "New Brunswick", "category": "Province"},
+    {"code": "NL", "name": "Newfoundland and Labrador", "category": "Province"},
+    {"code": "NS", "name": "Nova Scotia", "category": "Province"},
+    {"code": "NT", "name": "Northwest Territories", "category": "Territory"},
+    {"code": "NU", "name": "Nunavut", "category": "Territory"},
+    {"code": "ON", "name": "Ontario", "category": "Province"},
+    {"code": "PE", "name": "Prince Edward Island", "category": "Province"},
+    {"code": "QC", "name": "Quebec", "category": "Province"},
+    {"code": "SK", "name": "Saskatchewan", "category": "Province"},
+    {"code": "YT", "name": "Yukon", "category": "Territory"}
+  ]
+}

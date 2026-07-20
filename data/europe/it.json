@@ -1,0 +1,26 @@
+{
+  "country": "IT",
+  "name": "Italy",
+  "subdivisions": [
+    {"code": "65", "name": "Abruzzo", "category": "region"},
+    {"code": "77", "name": "Basilicata", "category": "region"},
+    {"code": "78", "name": "Calabria", "category": "region"},
+    {"code": "72", "name": "Campania", "category": "region"},
+    {"code": "45", "name": "Emilia-Romagna", "category": "region"},
+    {"code": "36", "name": "Friuli Venezia Giulia", "category": "autonomous region"},
+    {"code": "62", "name": "Lazio", "category": "region"},
+    {"code": "42", "name": "Liguria", "category": "region"},
+    {"code": "25", "name": "Lombardia", "category": "region"},
+    {"code": "57", "name": "Marche", "category": "region"},
+    {"code": "67", "name": "Molise", "category": "region"},
+    {"code": "21", "name": "Piemonte", "category": "region"},
+    {"code": "75", "name": "Puglia", "category": "region"},
+    {"code": "88", "name": "Sardegna", "category": "autonomous region"},
+    {"code": "82", "name": "Sicilia", "category": "autonomous region"},
+    {"code": "52", "name": "Toscana", "category": "region"},
+    {"code": "32", "name": "Trentino-Alto Adige", "category": "autonomous region"},
+    {"code": "55", "name": "Umbria", "category": "region"},
+    {"code": "23", "name": "Valle d'Aosta", "category": "autonomous region"},
+    {"code": "34", "name": "Veneto", "category": "region"}
+  ]
+}
