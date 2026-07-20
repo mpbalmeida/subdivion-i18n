@@ -12,18 +12,31 @@
 
     <artifactId>i18n</artifactId>
     <name>i18n</name>
+    <description>Internationalization utilities for Java, focusing on subdivision ISO-3166-2 codes.</description>
+    <url>https://github.com/mpbalmeida/i18n</url>
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.junit</groupId>
-                <artifactId>junit-bom</artifactId>
-                <version>5.11.0</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
+    <developers>
+        <developer>
+            <name>Marcos Almeida</name>
+            <email>me@marcosalmeida.dev</email>
+            <url>https://github.com/mpbalmeida</url>
+            <roles><role>developer</role></roles>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git://github.com/mpbalmeida/i18n.git</connection>
+        <developerConnection>scm:git:ssh://github.com/mpbalmeida/i18n.git</developerConnection>
+        <url>https://github.com/mpbalmeida/i18n</url>
+    </scm>
+
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
 
     <dependencies>
         <dependency>
@@ -40,11 +53,13 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
+            <version>5.11.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-params</artifactId>
+            <version>5.11.0</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
