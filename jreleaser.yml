@@ -1,6 +1,5 @@
 project:
   name: i18n
-  version: 0.4.0
   description: Internationalization utilities for Java, focusing on subdivision ISO-3166-2 codes.
   longDescription: Internationalization utilities for Java, focusing on subdivision ISO-3166-2 codes.
   authors:
