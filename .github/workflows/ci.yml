@@ -46,7 +46,7 @@ jobs:
       - name: Deploy snapshot
         if: github.event_name == 'pull_request'
         run: |
-          NEXT_VERSION=$(npx --yes semantic-release --dry-run 2>&1 \
+          NEXT_VERSION=$(npx --yes -p semantic-release -p @semantic-release/exec semantic-release --dry-run 2>&1 \
             | grep -oP 'The next release version is \K[0-9]+\.[0-9]+\.[0-9]+')
           if [ -z "$NEXT_VERSION" ]; then
             echo "Could not determine next version, skipping snapshot deploy"

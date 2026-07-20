@@ -39,7 +39,7 @@ jobs:
 
       - name: Semantic Release
         run: |
-          npx --yes semantic-release
+          npx --yes -p semantic-release -p @semantic-release/exec semantic-release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
