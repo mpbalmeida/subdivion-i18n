@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: 21
+          distribution: temurin
+          cache: maven
+
+      - name: Verify commit message
+        run: |
+          COMMIT="${{ github.event.pull_request.head.sha || github.sha }}"
+          git log -1 --pretty=format:"%s" "$COMMIT" > latest_commit_msg.txt
+          ./scripts/commit-msg.sh latest_commit_msg.txt
+
+      - name: Build and test
+        run: mvn verify --batch-mode

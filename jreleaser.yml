@@ -1,0 +1,20 @@
+project:
+  name: i18n
+  version: 0.4.0
+  description: Internationalization utilities for Java, focusing on subdivision ISO-3166-2 codes.
+  longDescription: Internationalization utilities for Java, focusing on subdivision ISO-3166-2 codes.
+  authors:
+    - Marcos Almeida
+  license: Apache-2.0
+  links:
+    homepage: https://github.com/mpbalmeida/i18n
+  inceptionYear: 2025
+
+release:
+  github:
+    owner: mpbalmeida
+    changelog:
+      enabled: true
+      sort: DESC
+      formatted: ALWAYS
+      preset: conventional-commits
