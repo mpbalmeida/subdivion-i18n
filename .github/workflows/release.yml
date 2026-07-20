@@ -81,7 +81,7 @@ jobs:
 
       - name: Set release version
         if: steps.version.outputs.skip != 'true'
-        run: mvn versions:set -DnewVersion="${{ steps.version.outputs.version }}" -DgenerateBackupPoms=false -pl library
+        run: mvn versions:set -DnewVersion="${{ steps.version.outputs.version }}" -DgenerateBackupPoms=false
 
       - name: Build and test
         if: steps.version.outputs.skip != 'true'
