@@ -22,6 +22,11 @@ jobs:
           java-version: 21
           distribution: temurin
           cache: maven
+          server-id: central
+          server-username: SONATYPE_TOKEN_USERNAME
+          server-password: SONATYPE_TOKEN_PASSWORD
+          gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
+          gpg-passphrase: GPG_PASSPHRASE
 
       - name: Verify commit message
         run: |
@@ -31,3 +36,49 @@ jobs:
 
       - name: Build and test
         run: mvn verify --batch-mode
+
+      - name: Calculate next snapshot version
+        if: github.event_name == 'pull_request'
+        id: snapshot
+        run: |
+          LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
+          echo "Last tag: $LAST_TAG"
+
+          MAJOR=0; MINOR=0; PATCH=0
+          while IFS= read -r commit; do
+            case "$commit" in
+              *BREAKING\ CHANGE*|*break!\(*\):*) MAJOR=$((MAJOR + 1)) ;;
+              feat!\(*\):*) MAJOR=$((MAJOR + 1)) ;;
+              feat*)               MINOR=$((MINOR + 1)) ;;
+              fix*)                PATCH=$((PATCH + 1)) ;;
+            esac
+          done < <(git log --pretty=format:"%s" "${LAST_TAG}..HEAD" 2>/dev/null)
+
+          PREV="${LAST_TAG#v}"
+          PV_MAJOR=$(echo "$PREV" | cut -d. -f1)
+          PV_MINOR=$(echo "$PREV" | cut -d. -f2)
+          PV_PATCH=$(echo "$PREV" | cut -d. -f3)
+
+          if [ "$MAJOR" -gt 0 ]; then
+            NEXT="$((PV_MAJOR + MAJOR)).0.0"
+          elif [ "$MINOR" -gt 0 ]; then
+            NEXT="${PV_MAJOR}.$((PV_MINOR + 1)).0"
+          elif [ "$PATCH" -gt 0 ]; then
+            NEXT="${PV_MAJOR}.${PV_MINOR}.$((PV_PATCH + 1))"
+          else
+            echo "No release commits, using current version for snapshot"
+            NEXT=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout | sed 's/-SNAPSHOT//')
+          fi
+
+          echo "Snapshot version: ${NEXT}-SNAPSHOT"
+          echo "version=${NEXT}-SNAPSHOT" >> $GITHUB_OUTPUT
+
+      - name: Deploy snapshot
+        if: github.event_name == 'pull_request'
+        run: |
+          mvn versions:set -DnewVersion="${{ steps.snapshot.outputs.version }}" -DgenerateBackupPoms=false
+          mvn deploy -P deployment --batch-mode
+        env:
+          SONATYPE_TOKEN_USERNAME: ${{ secrets.SONATYPE_TOKEN_USERNAME }}
+          SONATYPE_TOKEN_PASSWORD: ${{ secrets.SONATYPE_TOKEN_PASSWORD }}
+          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
