@@ -1,0 +1,23 @@
+{
+  "country": "NZ",
+  "name": "New Zealand",
+  "subdivisions": [
+    {"code": "AUK", "name": "Auckland", "category": "region"},
+    {"code": "BOP", "name": "Bay of Plenty", "category": "region"},
+    {"code": "CAN", "name": "Canterbury", "category": "region"},
+    {"code": "CIT", "name": "Chatham Islands Territory", "category": "special island authority"},
+    {"code": "GIS", "name": "Gisborne", "category": "region"},
+    {"code": "WGN", "name": "Greater Wellington", "category": "region"},
+    {"code": "HKB", "name": "Hawke's Bay", "category": "region"},
+    {"code": "MWT", "name": "Manawatū-Whanganui", "category": "region"},
+    {"code": "MBH", "name": "Marlborough", "category": "region"},
+    {"code": "NSN", "name": "Nelson", "category": "region"},
+    {"code": "NTL", "name": "Northland", "category": "region"},
+    {"code": "OTA", "name": "Otago", "category": "region"},
+    {"code": "STL", "name": "Southland", "category": "region"},
+    {"code": "TKI", "name": "Taranaki", "category": "region"},
+    {"code": "TAS", "name": "Tasman", "category": "region"},
+    {"code": "WKO", "name": "Waikato", "category": "region"},
+    {"code": "WTC", "name": "West Coast", "category": "region"}
+  ]
+}
