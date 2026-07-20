@@ -77,7 +77,7 @@ public class SubdivisionCodeGenerator {
                 // Validate subdivisions
                 Set<String> seenCodes = new HashSet<>();
                 Map<String, SubdivisionEntry> allSubs = country.getSubdivisions().stream()
-                        .collect(Collectors.toMap(SubdivisionEntry::getCode, s -> s));
+                        .collect(Collectors.toMap(SubdivisionEntry::getCode, s -> s, (a, b) -> a));
 
                 for (int i = 0; i < country.getSubdivisions().size(); i++) {
                     SubdivisionEntry s = country.getSubdivisions().get(i);
