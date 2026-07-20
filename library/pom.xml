@@ -32,6 +32,12 @@
             <version>1.29</version>
         </dependency>
         <dependency>
+            <groupId>dev.marcosalmeida</groupId>
+            <artifactId>i18n-generator</artifactId>
+            <version>${project.version}</version>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
             <scope>test</scope>
@@ -62,17 +68,10 @@
                                 <argument>${project.basedir}/../data</argument>
                                 <argument>${project.build.directory}/generated-sources/java</argument>
                             </arguments>
-                            <includePluginDependencies>true</includePluginDependencies>
+                            <includeProjectDependencies>true</includeProjectDependencies>
                         </configuration>
                     </execution>
                 </executions>
-                <dependencies>
-                    <dependency>
-                        <groupId>dev.marcosalmeida</groupId>
-                        <artifactId>i18n-generator</artifactId>
-                        <version>${project.version}</version>
-                    </dependency>
-                </dependencies>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
