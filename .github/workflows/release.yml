@@ -36,15 +36,21 @@ jobs:
           LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
           echo "Last tag: $LAST_TAG"
 
+          echo "=== Commits since $LAST_TAG ==="
+          git log --no-merges --pretty=format:"%s" "${LAST_TAG}..HEAD"
+
           MAJOR=0; MINOR=0; PATCH=0
           while IFS= read -r commit; do
+            echo "  checking: [$commit]"
             case "$commit" in
-              *BREAKING\ CHANGE*|*break!\(*\):*) MAJOR=$((MAJOR + 1)) ;;
-              feat!\(*\):*) MAJOR=$((MAJOR + 1)) ;;
-              feat*)               MINOR=$((MINOR + 1)) ;;
-              fix*)                PATCH=$((PATCH + 1)) ;;
+              *"BREAKING CHANGE"*|*feat!\(*\):*) echo "    -> MAJOR"; MAJOR=$((MAJOR + 1)) ;;
+              feat*)                                echo "    -> MINOR"; MINOR=$((MINOR + 1)) ;;
+              fix*)                                 echo "    -> PATCH"; PATCH=$((PATCH + 1)) ;;
+              *)                                    echo "    -> skip" ;;
             esac
-          done < <(git log --pretty=format:"%s" "${LAST_TAG}..HEAD" 2>/dev/null)
+          done < <(git log --no-merges --pretty=format:"%s" "${LAST_TAG}..HEAD")
+
+          echo "Counts: MAJOR=$MAJOR MINOR=$MINOR PATCH=$PATCH"
 
           PREV="${LAST_TAG#v}"
           PV_MAJOR=$(echo "$PREV" | cut -d. -f1)
