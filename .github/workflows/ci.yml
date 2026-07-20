@@ -16,6 +16,12 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
       - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
@@ -38,56 +44,21 @@ jobs:
       - name: Build and test
         run: mvn verify --batch-mode
 
-      - name: Calculate next snapshot version
-        if: github.event_name == 'pull_request'
-        id: snapshot
-        run: |
-          LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
-          if [ -z "$LAST_TAG" ]; then
-            echo "No tags found, using pom.xml version as base"
-            LAST_TAG="v$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout | sed 's/-SNAPSHOT//')"
-            RANGE="${{ github.event.pull_request.head.sha }}"
-          else
-            RANGE="${LAST_TAG}..${{ github.event.pull_request.head.sha }}"
-          fi
-          echo "Last tag: $LAST_TAG"
-
-          MAJOR=0; MINOR=0; PATCH=0
-          while IFS= read -r commit; do
-            case "$commit" in
-              *"BREAKING CHANGE"*|*feat!\(*\):*) MAJOR=$((MAJOR + 1)) ;;
-              feat*)                                MINOR=$((MINOR + 1)) ;;
-              fix*)                                 PATCH=$((PATCH + 1)) ;;
-            esac
-          done < <(git log --no-merges --pretty=tformat:"%s" $RANGE)
-
-          echo "Counts: MAJOR=$MAJOR MINOR=$MINOR PATCH=$PATCH"
-
-          PREV="${LAST_TAG#v}"
-          PV_MAJOR=$(echo "$PREV" | cut -d. -f1)
-          PV_MINOR=$(echo "$PREV" | cut -d. -f2)
-          PV_PATCH=$(echo "$PREV" | cut -d. -f3)
-
-          if [ "$MAJOR" -gt 0 ]; then
-            NEXT="$((PV_MAJOR + MAJOR)).0.0"
-          elif [ "$MINOR" -gt 0 ]; then
-            NEXT="${PV_MAJOR}.$((PV_MINOR + 1)).0"
-          elif [ "$PATCH" -gt 0 ]; then
-            NEXT="${PV_MAJOR}.${PV_MINOR}.$((PV_PATCH + 1))"
-          else
-            echo "No release commits, using current version for snapshot"
-            NEXT=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout | sed 's/-SNAPSHOT//')
-          fi
-
-          echo "Snapshot version: ${NEXT}-SNAPSHOT"
-          echo "version=${NEXT}-SNAPSHOT" >> $GITHUB_OUTPUT
-
       - name: Deploy snapshot
         if: github.event_name == 'pull_request'
         run: |
-          mvn versions:set -DnewVersion="${{ steps.snapshot.outputs.version }}" -DgenerateBackupPoms=false
+          npm ci
+          NEXT_VERSION=$(npx semantic-release --dry-run 2>&1 \
+            | grep -oP 'The next release version is \K[0-9]+\.[0-9]+\.[0-9]+')
+          if [ -z "$NEXT_VERSION" ]; then
+            echo "Could not determine next version, skipping snapshot deploy"
+            exit 0
+          fi
+          echo "Next version: ${NEXT_VERSION}-SNAPSHOT"
+          mvn versions:set -DnewVersion="${NEXT_VERSION}-SNAPSHOT" -DgenerateBackupPoms=false
           mvn deploy -P deployment --batch-mode
         env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONATYPE_TOKEN_USERNAME: ${{ secrets.SONATYPE_TOKEN_USERNAME }}
           SONATYPE_TOKEN_PASSWORD: ${{ secrets.SONATYPE_TOKEN_PASSWORD }}
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}

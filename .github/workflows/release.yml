@@ -17,6 +17,12 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
       - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
@@ -29,75 +35,17 @@ jobs:
           gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
           gpg-passphrase: GPG_PASSPHRASE
 
-      - name: Calculate next release version
-        id: version
-        run: |
-          LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
-          if [ -z "$LAST_TAG" ]; then
-            echo "No tags found, using pom.xml version as base"
-            LAST_TAG="v$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout | sed 's/-SNAPSHOT//')"
-            RANGE="HEAD"
-          else
-            RANGE="${LAST_TAG}..HEAD"
-          fi
-          echo "Last tag: $LAST_TAG"
-
-          echo "=== Commits in range ==="
-          git log --no-merges --pretty=tformat:"%s" $RANGE
-
-          MAJOR=0; MINOR=0; PATCH=0
-          while IFS= read -r commit; do
-            echo "  checking: [$commit]"
-            case "$commit" in
-              *"BREAKING CHANGE"*|*feat!\(*\):*) echo "    -> MAJOR"; MAJOR=$((MAJOR + 1)) ;;
-              feat*)                                echo "    -> MINOR"; MINOR=$((MINOR + 1)) ;;
-              fix*)                                 echo "    -> PATCH"; PATCH=$((PATCH + 1)) ;;
-              *)                                    echo "    -> skip" ;;
-            esac
-          done < <(git log --no-merges --pretty=tformat:"%s" $RANGE)
-
-          echo "Counts: MAJOR=$MAJOR MINOR=$MINOR PATCH=$PATCH"
-
-          PREV="${LAST_TAG#v}"
-          PV_MAJOR=$(echo "$PREV" | cut -d. -f1)
-          PV_MINOR=$(echo "$PREV" | cut -d. -f2)
-          PV_PATCH=$(echo "$PREV" | cut -d. -f3)
-
-          if [ "$MAJOR" -gt 0 ]; then
-            NEXT="$((PV_MAJOR + MAJOR)).0.0"
-          elif [ "$MINOR" -gt 0 ]; then
-            NEXT="${PV_MAJOR}.$((PV_MINOR + 1)).0"
-          elif [ "$PATCH" -gt 0 ]; then
-            NEXT="${PV_MAJOR}.${PV_MINOR}.$((PV_PATCH + 1))"
-          else
-            echo "No release-worthy commits found, skipping"
-            echo "skip=true" >> $GITHUB_OUTPUT
-            exit 0
-          fi
-
-          echo "Next version: $NEXT"
-          echo "version=$NEXT" >> $GITHUB_OUTPUT
-          echo "skip=false" >> $GITHUB_OUTPUT
-
-      - name: Set release version
-        if: steps.version.outputs.skip != 'true'
-        run: mvn versions:set -DnewVersion="${{ steps.version.outputs.version }}" -DgenerateBackupPoms=false
-
       - name: Build and test
-        if: steps.version.outputs.skip != 'true'
         run: mvn verify --batch-mode
 
-      - name: Run JReleaser
-        if: steps.version.outputs.skip != 'true'
-        uses: jreleaser/release-action@v2
-        with:
-          setup-java: false
+      - name: Semantic Release
+        run: |
+          npm ci
+          npx semantic-release
         env:
-          JRELEASER_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          JRELEASER_PROJECT_VERSION: ${{ steps.version.outputs.version }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish to Maven Central
-        if: steps.version.outputs.skip != 'true'
         run: mvn deploy -P deployment --batch-mode
         env:
           SONATYPE_TOKEN_USERNAME: ${{ secrets.SONATYPE_TOKEN_USERNAME }}
@@ -105,9 +53,8 @@ jobs:
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
 
       - name: Bump to next SNAPSHOT
-        if: steps.version.outputs.skip != 'true'
         run: |
-          NEXT="${{ steps.version.outputs.version }}"
+          NEXT=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
           MAJOR=$(echo "$NEXT" | cut -d. -f1)
           MINOR=$(echo "$NEXT" | cut -d. -f2)
           NEXT_SNAPSHOT="${MAJOR}.$((MINOR + 1)).0-SNAPSHOT"
@@ -116,6 +63,12 @@ jobs:
 
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          if git diff --quiet pom.xml; then
+            echo "pom.xml unchanged, skipping bump commit"
+            exit 0
+          fi
+
           git add pom.xml
           git commit -m "chore(release): bump to $NEXT_SNAPSHOT [skip ci]"
           git push

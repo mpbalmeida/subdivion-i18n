@@ -1,0 +1,11 @@
+{
+  "name": "i18n",
+  "private": true,
+  "devDependencies": {
+    "semantic-release": "latest",
+    "@semantic-release/exec": "latest",
+    "@semantic-release/github": "latest",
+    "@semantic-release/release-notes-generator": "latest",
+    "@semantic-release/commit-analyzer": "latest"
+  }
+}
