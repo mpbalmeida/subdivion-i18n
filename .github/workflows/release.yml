@@ -43,7 +43,7 @@ jobs:
           echo "Last tag: $LAST_TAG"
 
           echo "=== Commits in range ==="
-          git log --no-merges --pretty=format:"%s" $RANGE
+          git log --no-merges --pretty=tformat:"%s" $RANGE
 
           MAJOR=0; MINOR=0; PATCH=0
           while IFS= read -r commit; do
@@ -54,7 +54,7 @@ jobs:
               fix*)                                 echo "    -> PATCH"; PATCH=$((PATCH + 1)) ;;
               *)                                    echo "    -> skip" ;;
             esac
-          done < <(git log --no-merges --pretty=format:"%s" $RANGE)
+          done < <(git log --no-merges --pretty=tformat:"%s" $RANGE)
 
           echo "Counts: MAJOR=$MAJOR MINOR=$MINOR PATCH=$PATCH"
 
