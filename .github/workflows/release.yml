@@ -33,17 +33,16 @@ jobs:
       - name: Build and test
         run: mvn verify --batch-mode
 
-      - name: Semantic Release
-        id: semantic
-        uses: cycjimmy/semantic-release-action@v4
+      - name: Run JReleaser
+        id: jreleaser
+        uses: jreleaser/release-action@v2
         with:
-          extra_plugins: |
-            @semantic-release/exec
+          setup-java: false
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          JRELEASER_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish to Maven Central
-        if: steps.semantic.outputs.new_release_published == 'true'
+        if: steps.jreleaser.outputs.release_tag != ''
         run: mvn deploy -P deployment --batch-mode
         env:
           SONATYPE_TOKEN_USERNAME: ${{ secrets.SONATYPE_TOKEN_USERNAME }}
@@ -51,9 +50,10 @@ jobs:
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
 
       - name: Bump to next SNAPSHOT
-        if: steps.semantic.outputs.new_release_published == 'true'
+        if: steps.jreleaser.outputs.release_tag != ''
         run: |
-          NEW_VERSION="${{ steps.semantic.outputs.new_release_version }}"
+          TAG="${{ steps.jreleaser.outputs.release_tag }}"
+          NEW_VERSION="${TAG#v}"
           MAJOR=$(echo "$NEW_VERSION" | cut -d. -f1)
           MINOR=$(echo "$NEW_VERSION" | cut -d. -f2)
           NEXT_SNAPSHOT="${MAJOR}.$((MINOR + 1)).0-SNAPSHOT"
