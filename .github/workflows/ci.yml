@@ -59,7 +59,7 @@ jobs:
               feat*)                                MINOR=$((MINOR + 1)) ;;
               fix*)                                 PATCH=$((PATCH + 1)) ;;
             esac
-          done < <(git log --no-merges --pretty=format:"%s" $RANGE)
+          done < <(git log --no-merges --pretty=tformat:"%s" $RANGE)
 
           echo "Counts: MAJOR=$MAJOR MINOR=$MINOR PATCH=$PATCH"
 
