@@ -52,7 +52,7 @@ jobs:
               feat*)               MINOR=$((MINOR + 1)) ;;
               fix*)                PATCH=$((PATCH + 1)) ;;
             esac
-          done < <(git log --pretty=format:"%s" "${LAST_TAG}..HEAD" 2>/dev/null)
+          done < <(git log --pretty=format:"%s" "${LAST_TAG}..${{ github.event.pull_request.head.sha }}" 2>/dev/null)
 
           PREV="${LAST_TAG#v}"
           PV_MAJOR=$(echo "$PREV" | cut -d. -f1)
