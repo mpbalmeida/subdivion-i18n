@@ -104,7 +104,7 @@
                 </executions>
                 <configuration>
                     <installHooks>
-                        <commit-msg>scripts/commit-msg.sh</commit-msg>
+                        <commit-msg>${project.basedir}/../scripts/commit-msg.sh</commit-msg>
                     </installHooks>
                 </configuration>
             </plugin>
