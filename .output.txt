@@ -1,0 +1,547 @@
+[File: /Users/marcos.almeida/dev/i18n/src/main/java/dev/marcosalmeida/i18n/Subdivision.java (52 lines total)]
+(15 more lines above)
+16:    /**
+17:     * Returns the English name of the subdivision.
+18:     *
+19:     * @return the subdivision name.
+20:     */
+21:    String getSubdivisionName();
+22:
+23:    /**
+24:     * Returns the category of the subdivision (e.g., "State", "District", "Outlying area").
+25:     *
+26:     * @return the subdivision category.
+(26 more lines below)
+
+
+-------------------------------------------------
+
+[File: /Users/marcos.almeida/dev/i18n/src/main/java/dev/marcosalmeida/i18n/SubdivisionCode.java (1261 lines total)]
+(32 more lines above)
+33:        if (name == null || name.isBlank()) {
+34:            return Optional.empty();
+35:        }
+36:        String normalized = name.trim();
+37:        return Arrays.stream(values)
+38:                .filter(s -> s.getSubdivisionName().equalsIgnoreCase(normalized))
+39:                .map(Subdivision.class::cast)
+40:                .findFirst();
+41:    }
+42:
+43:    private static <T extends Subdivision> Optional<Subdivision> find(T[] values, String value) {
+44:        if (value == null || value.isBlank()) {
+45:            return Optional.empty();
+46:        }
+47:
+48:        try {
+
+...
+
+100:            this.name = name;
+101:            this.category = category;
+102:        }
+103:
+104:        @Override
+105:        public String getCode() {
+106:            return code;
+107:        }
+108:
+109:        @Override
+110:        public String getSubdivisionName() {
+111:            return name;
+112:        }
+113:
+114:        @Override
+115:        public String getCategory() {
+116:            return category;
+117:        }
+118:
+119:        /**
+120:         * Returns the subdivision for the given code.
+
+...
+
+234:            this.name = name;
+235:            this.category = category;
+236:        }
+237:
+238:        @Override
+239:        public String getCode() {
+240:            return code;
+241:        }
+242:
+243:        @Override
+244:        public String getSubdivisionName() {
+245:            return name;
+246:        }
+247:
+248:        @Override
+249:        public String getCategory() {
+250:            return category;
+251:        }
+252:
+253:        /**
+254:         * Returns the subdivision for the given code.
+
+...
+
+340:            this.name = name;
+341:            this.category = category;
+342:        }
+343:
+344:        @Override
+345:        public String getCode() {
+346:            return code;
+347:        }
+348:
+349:        @Override
+350:        public String getSubdivisionName() {
+351:            return name;
+352:        }
+353:
+354:        @Override
+355:        public String getCategory() {
+356:            return category;
+357:        }
+358:
+359:        /**
+360:         * Returns the subdivision for the given code.
+
+...
+
+482:            this.category = category;
+483:            this.parent = parent;
+484:        }
+485:
+486:        @Override
+487:        public String getCode() {
+488:            return code;
+489:        }
+490:
+491:        @Override
+492:        public String getSubdivisionName() {
+493:            return name;
+494:        }
+495:
+496:        @Override
+497:        public String getCategory() {
+498:            return category;
+499:        }
+500:
+501:        @Override
+502:        public Optional<Subdivision> getParent() {
+
+...
+
+617:            this.name = name;
+618:            this.category = category;
+619:        }
+620:
+621:        @Override
+622:        public String getCode() {
+623:            return code;
+624:        }
+625:
+626:        @Override
+627:        public String getSubdivisionName() {
+628:            return name;
+629:        }
+630:
+631:        @Override
+632:        public String getCategory() {
+633:            return category;
+634:        }
+635:
+636:        /**
+637:         * Returns the subdivision for the given code.
+
+...
+
+761:            this.name = name;
+762:            this.category = category;
+763:        }
+764:
+765:        @Override
+766:        public String getCode() {
+767:            return code;
+768:        }
+769:
+770:        @Override
+771:        public String getSubdivisionName() {
+772:            return name;
+773:        }
+774:
+775:        @Override
+776:        public String getCategory() {
+777:            return category;
+778:        }
+779:
+780:        /**
+781:         * Returns the subdivision for the given code.
+
+...
+
+885:            this.name = name;
+886:            this.category = category;
+887:        }
+888:
+889:        @Override
+890:        public String getCode() {
+891:            return code;
+892:        }
+893:
+894:        @Override
+895:        public String getSubdivisionName() {
+896:            return name;
+897:        }
+898:
+899:        @Override
+900:        public String getCategory() {
+901:            return category;
+902:        }
+903:
+904:        /**
+905:         * Returns the subdivision for the given code.
+
+...
+
+1079:            this.name = name;
+1080:            this.category = category;
+1081:        }
+1082:
+1083:        @Override
+1084:        public String getCode() {
+1085:            return code;
+1086:        }
+1087:
+1088:        @Override
+1089:        public String getSubdivisionName() {
+1090:            return name;
+1091:        }
+1092:
+1093:        @Override
+1094:        public String getCategory() {
+(167 more lines below)
+
+
+-------------------------------------------------
+
+[File: /Users/marcos.almeida/dev/i18n/src/test/java/dev/marcosalmeida/i18n/SubdivisionAUTest.java (91 lines total)]
+(6 more lines above)
+7:
+8:    @Test
+9:    public void testAUSubdivisions() {
+10:        SubdivisionCode.AU nsw = SubdivisionCode.AU.NSW;
+11:        assertEquals("AU-NSW", nsw.getCode());
+12:        assertEquals("New South Wales", nsw.getSubdivisionName());
+13:        assertEquals("state", nsw.getCategory());
+14:
+15:        Subdivision[] subdivisions = SubdivisionCode.getSubdivisions(com.neovisionaries.i18n.CountryCode.AU);
+16:        assertNotNull(subdivisions);
+17:        assertEquals(8, subdivisions.length); // 6 states + 2 territories
+18:
+19:        Subdivision act = subdivisions[0];
+20:        assertEquals("AU-ACT", act.getCode());
+21:        assertEquals("Australian Capital Territory", act.getSubdivisionName());
+22:        assertEquals("territory", act.getCategory());
+23:
+24:        Subdivision wa = subdivisions[7];
+25:        assertEquals("AU-WA", wa.getCode());
+26:        assertEquals("Western Australia", wa.getSubdivisionName());
+27:        assertEquals("state", wa.getCategory());
+28:    }
+29:
+30:    @Test
+31:    public void testFromCode() {
+(60 more lines below)
+
+
+-------------------------------------------------
+
+[File: /Users/marcos.almeida/dev/i18n/src/test/java/dev/marcosalmeida/i18n/SubdivisionBRTest.java (81 lines total)]
+(6 more lines above)
+7:
+8:    @Test
+9:    public void testBRSubdivisions() {
+10:        SubdivisionCode.BR ac = SubdivisionCode.BR.AC;
+11:        assertEquals("BR-AC", ac.getCode());
+12:        assertEquals("Acre", ac.getSubdivisionName());
+13:        assertEquals("state", ac.getCategory());
+14:
+15:        Subdivision[] subdivisions = SubdivisionCode.getSubdivisions(com.neovisionaries.i18n.CountryCode.BR);
+16:        assertNotNull(subdivisions);
+17:        assertEquals(27, subdivisions.length); // 26 states + 1 federal district
+18:
+19:        Subdivision acre = subdivisions[0];
+20:        assertEquals("BR-AC", acre.getCode());
+21:        assertEquals("Acre", acre.getSubdivisionName());
+22:
+23:        Subdivision tocantins = subdivisions[26];
+24:        assertEquals("BR-TO", tocantins.getCode());
+25:        assertEquals("Tocantins", tocantins.getSubdivisionName());
+26:        assertEquals("state", tocantins.getCategory());
+27:
+28:        Subdivision df = SubdivisionCode.BR.DF;
+29:        assertEquals("BR-DF", df.getCode());
+30:        assertEquals("Distrito Federal", df.getSubdivisionName());
+31:        assertEquals("federal district", df.getCategory());
+32:    }
+33:
+34:    @Test
+35:    public void testFromCode() {
+(46 more lines below)
+
+
+-------------------------------------------------
+
+[File: /Users/marcos.almeida/dev/i18n/src/test/java/dev/marcosalmeida/i18n/SubdivisionCATest.java (89 lines total)]
+(6 more lines above)
+7:
+8:    @Test
+9:    public void testCASubdivisions() {
+10:        SubdivisionCode.CA ab = SubdivisionCode.CA.AB;
+11:        assertEquals("CA-AB", ab.getCode());
+12:        assertEquals("Alberta", ab.getSubdivisionName());
+13:        assertEquals("Province", ab.getCategory());
+14:
+15:        Subdivision[] subdivisions = SubdivisionCode.getSubdivisions(com.neovisionaries.i18n.CountryCode.CA);
+16:        assertNotNull(subdivisions);
+17:        assertEquals(13, subdivisions.length); // 10 provinces + 3 territories
+18:
+19:        Subdivision alberta = subdivisions[0];
+20:        assertEquals("CA-AB", alberta.getCode());
+21:        assertEquals("Alberta", alberta.getSubdivisionName());
+22:
+23:        Subdivision yukon = subdivisions[12];
+24:        assertEquals("CA-YT", yukon.getCode());
+25:        assertEquals("Yukon", yukon.getSubdivisionName());
+26:        assertEquals("Territory", yukon.getCategory());
+27:
+28:        Subdivision nt = SubdivisionCode.CA.NT;
+29:        assertEquals("CA-NT", nt.getCode());
+30:        assertEquals("Northwest Territories", nt.getSubdivisionName());
+31:        assertEquals("Territory", nt.getCategory());
+32:    }
+33:
+34:    @Test
+35:    public void testFromCode() {
+(54 more lines below)
+
+
+-------------------------------------------------
+
+[File: /Users/marcos.almeida/dev/i18n/src/test/java/dev/marcosalmeida/i18n/SubdivisionCodeTest.java (125 lines total)]
+(43 more lines above)
+44:    }
+45:
+46:    @Test
+47:    public void testFromCode() {
+48:        Subdivision auNsw = SubdivisionCode.fromCode("AU-NSW");
+49:        assertNotNull(auNsw);
+50:        assertEquals("New South Wales", auNsw.getSubdivisionName());
+51:
+52:        Subdivision usAl = SubdivisionCode.fromCode("US-AL");
+53:        assertNotNull(usAl);
+54:        assertEquals("Alabama", usAl.getSubdivisionName());
+55:
+56:        Subdivision it25 = SubdivisionCode.fromCode("IT-25");
+57:        assertNotNull(it25);
+58:        assertEquals("Lombardia", it25.getSubdivisionName());
+59:
+60:        Subdivision caOn = SubdivisionCode.fromCode("CA-ON");
+61:        assertNotNull(caOn);
+62:        assertEquals("Ontario", caOn.getSubdivisionName());
+63:
+64:        Subdivision brSp = SubdivisionCode.fromCode("BR-SP");
+65:        assertNotNull(brSp);
+66:        assertEquals("São Paulo", brSp.getSubdivisionName());
+67:
+68:        Subdivision ieD = SubdivisionCode.fromCode("IE-D");
+69:        assertNotNull(ieD);
+70:        assertEquals("Dublin", ieD.getSubdivisionName());
+71:
+72:        // Test lookup by subdivision part (returns the first match, which is BR-AL for "AL")
+73:        Subdivision alShort = SubdivisionCode.fromCode("AL");
+74:        assertNotNull(alShort);
+75:        assertEquals("BR-AL", alShort.getCode());
+76:
+(49 more lines below)
+
+
+-------------------------------------------------
+
+[File: /Users/marcos.almeida/dev/i18n/src/test/java/dev/marcosalmeida/i18n/SubdivisionIETest.java (104 lines total)]
+(6 more lines above)
+7:
+8:    @Test
+9:    public void testIESubdivisions() {
+10:        SubdivisionCode.IE c = SubdivisionCode.IE.C;
+11:        assertEquals("IE-C", c.getCode());
+12:        assertEquals("Connaught", c.getSubdivisionName());
+13:        assertEquals("province", c.getCategory());
+14:
+15:        Subdivision[] subdivisions = SubdivisionCode.getSubdivisions(com.neovisionaries.i18n.CountryCode.IE);
+16:        assertNotNull(subdivisions);
+17:        assertEquals(30, subdivisions.length); // 4 provinces + 26 counties
+18:
+19:        Subdivision connaught = subdivisions[0];
+20:        assertEquals("IE-C", connaught.getCode());
+21:        assertEquals("Connaught", connaught.getSubdivisionName());
+22:
+23:        Subdivision wicklow = subdivisions[29];
+24:        assertEquals("IE-WW", wicklow.getCode());
+25:        assertEquals("Wicklow", wicklow.getSubdivisionName());
+26:        assertEquals("county", wicklow.getCategory());
+27:
+28:        Subdivision dublin = SubdivisionCode.IE.D;
+29:        assertEquals("IE-D", dublin.getCode());
+30:        assertEquals("Dublin", dublin.getSubdivisionName());
+31:        assertEquals("county", dublin.getCategory());
+32:    }
+33:
+34:    @Test
+35:    public void testFromCode() {
+(69 more lines below)
+
+
+-------------------------------------------------
+
+[File: /Users/marcos.almeida/dev/i18n/src/test/java/dev/marcosalmeida/i18n/SubdivisionITTest.java (86 lines total)]
+(6 more lines above)
+7:
+8:    @Test
+9:    public void testITSubdivisions() {
+10:        SubdivisionCode.IT lombardia = SubdivisionCode.IT.IT_25;
+11:        assertEquals("IT-25", lombardia.getCode());
+12:        assertEquals("Lombardia", lombardia.getSubdivisionName());
+13:        assertEquals("region", lombardia.getCategory());
+14:
+15:        Subdivision[] subdivisions = SubdivisionCode.getSubdivisions(com.neovisionaries.i18n.CountryCode.IT);
+16:        assertNotNull(subdivisions);
+17:        assertEquals(20, subdivisions.length);
+18:
+19:        Subdivision abruzzo = subdivisions[0];
+20:        assertEquals("IT-65", abruzzo.getCode());
+21:        assertEquals("Abruzzo", abruzzo.getSubdivisionName());
+22:
+23:        Subdivision veneto = subdivisions[19];
+24:        assertEquals("IT-34", veneto.getCode());
+25:        assertEquals("Veneto", veneto.getSubdivisionName());
+26:        assertEquals("region", veneto.getCategory());
+27:
+28:        Subdivision sardegna = SubdivisionCode.IT.IT_88;
+29:        assertEquals("IT-88", sardegna.getCode());
+30:        assertEquals("Sardegna", sardegna.getSubdivisionName());
+31:        assertEquals("autonomous region", sardegna.getCategory());
+32:    }
+33:
+34:    @Test
+35:    public void testFromCode() {
+(51 more lines below)
+
+
+-------------------------------------------------
+
+[File: /Users/marcos.almeida/dev/i18n/src/test/java/dev/marcosalmeida/i18n/SubdivisionMXTest.java (81 lines total)]
+(6 more lines above)
+7:
+8:    @Test
+9:    public void testMXSubdivisions() {
+10:        SubdivisionCode.MX agu = SubdivisionCode.MX.AGU;
+11:        assertEquals("MX-AGU", agu.getCode());
+12:        assertEquals("Aguascalientes", agu.getSubdivisionName());
+13:        assertEquals("state", agu.getCategory());
+14:
+15:        Subdivision[] subdivisions = SubdivisionCode.getSubdivisions(com.neovisionaries.i18n.CountryCode.MX);
+16:        assertNotNull(subdivisions);
+17:        assertEquals(32, subdivisions.length); // 31 states + 1 federal entity
+18:
+19:        Subdivision aguascalientes = subdivisions[0];
+20:        assertEquals("MX-AGU", aguascalientes.getCode());
+21:        assertEquals("Aguascalientes", aguascalientes.getSubdivisionName());
+22:
+23:        Subdivision zacatecas = subdivisions[31];
+24:        assertEquals("MX-ZAC", zacatecas.getCode());
+25:        assertEquals("Zacatecas", zacatecas.getSubdivisionName());
+26:        assertEquals("state", zacatecas.getCategory());
+27:
+28:        Subdivision cmx = SubdivisionCode.MX.CMX;
+29:        assertEquals("MX-CMX", cmx.getCode());
+30:        assertEquals("Ciudad de México", cmx.getSubdivisionName());
+31:        assertEquals("federal entity", cmx.getCategory());
+32:    }
+33:
+34:    @Test
+35:    public void testFromCode() {
+(46 more lines below)
+
+
+-------------------------------------------------
+
+[File: /Users/marcos.almeida/dev/i18n/src/test/java/dev/marcosalmeida/i18n/SubdivisionNZTest.java (81 lines total)]
+(6 more lines above)
+7:
+8:    @Test
+9:    public void testNZSubdivisions() {
+10:        SubdivisionCode.NZ auk = SubdivisionCode.NZ.AUK;
+11:        assertEquals("NZ-AUK", auk.getCode());
+12:        assertEquals("Auckland", auk.getSubdivisionName());
+13:        assertEquals("region", auk.getCategory());
+14:
+15:        Subdivision[] subdivisions = SubdivisionCode.getSubdivisions(com.neovisionaries.i18n.CountryCode.NZ);
+16:        assertNotNull(subdivisions);
+17:        assertEquals(17, subdivisions.length); // 16 regions + 1 special island authority
+18:
+19:        Subdivision auckland = subdivisions[0];
+20:        assertEquals("NZ-AUK", auckland.getCode());
+21:        assertEquals("Auckland", auckland.getSubdivisionName());
+22:
+23:        Subdivision westCoast = subdivisions[16];
+24:        assertEquals("NZ-WTC", westCoast.getCode());
+25:        assertEquals("West Coast", westCoast.getSubdivisionName());
+26:        assertEquals("region", westCoast.getCategory());
+27:
+28:        Subdivision cit = SubdivisionCode.NZ.CIT;
+29:        assertEquals("NZ-CIT", cit.getCode());
+30:        assertEquals("Chatham Islands Territory", cit.getSubdivisionName());
+31:        assertEquals("special island authority", cit.getCategory());
+32:    }
+33:
+34:    @Test
+35:    public void testFromCode() {
+(46 more lines below)
+
+
+-------------------------------------------------
+
+[File: /Users/marcos.almeida/dev/i18n/src/test/java/dev/marcosalmeida/i18n/SubdivisionUSTest.java (86 lines total)]
+(7 more lines above)
+8:    @Test
+9:    public void testUSSubdivisions() {
+10:        // Direct access to the enum constant
+11:        SubdivisionCode.US al = SubdivisionCode.US.AL;
+12:        assertEquals("US-AL", al.getCode());
+13:        assertEquals("Alabama", al.getSubdivisionName());
+14:
+15:        Subdivision[] subdivisions = SubdivisionCode.getSubdivisions(com.neovisionaries.i18n.CountryCode.US);
+16:        assertNotNull(subdivisions);
+17:        assertEquals(57, subdivisions.length); // 50 states + DC + 6 outlying areas
+18:
+19:        Subdivision alabama = subdivisions[0];
+20:        assertEquals("US-AL", alabama.getCode());
+21:        assertEquals("Alabama", alabama.getSubdivisionName());
+22:        assertEquals("State", alabama.getCategory());
+23:
+24:        Subdivision virginIslands = subdivisions[56];
+25:        assertEquals("US-VI", virginIslands.getCode());
+26:        assertEquals("Virgin Islands, U.S.", virginIslands.getSubdivisionName());
+27:        assertEquals("Outlying area", virginIslands.getCategory());
+28:    }
+29:
+30:    @Test
+31:    public void testFromCode() {
+(55 more lines below)
+
+
+-------------------------------------------------
+
