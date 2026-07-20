@@ -45,7 +45,7 @@ jobs:
           LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
           if [ -z "$LAST_TAG" ]; then
             echo "No tags found, using pom.xml version as base"
-            LAST_TAG="v$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout | sed 's/-SNAPSHOT//')"
+            LAST_TAG="v$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout -pl library | sed 's/-SNAPSHOT//')"
             RANGE="${{ github.event.pull_request.head.sha }}"
           else
             RANGE="${LAST_TAG}..${{ github.event.pull_request.head.sha }}"
@@ -76,7 +76,7 @@ jobs:
             NEXT="${PV_MAJOR}.${PV_MINOR}.$((PV_PATCH + 1))"
           else
             echo "No release commits, using current version for snapshot"
-            NEXT=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout | sed 's/-SNAPSHOT//')
+            NEXT=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout -pl library | sed 's/-SNAPSHOT//')
           fi
 
           echo "Snapshot version: ${NEXT}-SNAPSHOT"
@@ -85,8 +85,8 @@ jobs:
       - name: Deploy snapshot
         if: github.event_name == 'pull_request'
         run: |
-          mvn versions:set -DnewVersion="${{ steps.snapshot.outputs.version }}" -DgenerateBackupPoms=false
-          mvn deploy -P deployment --batch-mode
+          mvn versions:set -DnewVersion="${{ steps.snapshot.outputs.version }}" -DgenerateBackupPoms=false -pl library
+          mvn deploy -P deployment --batch-mode -pl library
         env:
           SONATYPE_TOKEN_USERNAME: ${{ secrets.SONATYPE_TOKEN_USERNAME }}
           SONATYPE_TOKEN_PASSWORD: ${{ secrets.SONATYPE_TOKEN_PASSWORD }}
