@@ -32,11 +32,18 @@ jobs:
       - name: Calculate next release version
         id: version
         run: |
-          LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
+          LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+          if [ -z "$LAST_TAG" ]; then
+            echo "No tags found, using pom.xml version as base"
+            LAST_TAG="v$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout | sed 's/-SNAPSHOT//')"
+            RANGE="HEAD"
+          else
+            RANGE="${LAST_TAG}..HEAD"
+          fi
           echo "Last tag: $LAST_TAG"
 
-          echo "=== Commits since $LAST_TAG ==="
-          git log --no-merges --pretty=format:"%s" "${LAST_TAG}..HEAD"
+          echo "=== Commits in range ==="
+          git log --no-merges --pretty=format:"%s" $RANGE
 
           MAJOR=0; MINOR=0; PATCH=0
           while IFS= read -r commit; do
@@ -47,7 +54,7 @@ jobs:
               fix*)                                 echo "    -> PATCH"; PATCH=$((PATCH + 1)) ;;
               *)                                    echo "    -> skip" ;;
             esac
-          done < <(git log --no-merges --pretty=format:"%s" "${LAST_TAG}..HEAD")
+          done < <(git log --no-merges --pretty=format:"%s" $RANGE)
 
           echo "Counts: MAJOR=$MAJOR MINOR=$MINOR PATCH=$PATCH"
 
