@@ -164,7 +164,7 @@ i18n/
 ### Phase 5 — Americas (~10 new countries)
 
 - Argentina, Chile, Colombia, Peru, remaining Central/South American and Caribbean countries (US, CA, MX, BR already covered)
-- Tag: `1.0.0` release
+- Tag: `0.10.0` release
 
 ## Non-Goals
 
