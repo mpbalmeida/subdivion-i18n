@@ -15,7 +15,19 @@ Refactor `SubdivisionCode.java` (currently 1,266 lines for 8 countries, all hand
 
 ## Data Format
 
-Each country is a JSON file in `data/` with the following schema:
+Each country is a JSON file under `data/`, grouped by continent subdirectory:
+
+```
+data/
+├── europe/        (ie.json, it.json, de.json, ...)
+├── north-america/ (us.json, ca.json, mx.json)
+├── south-america/ (br.json, ar.json, ...)
+├── asia/          (jp.json, cn.json, ...)
+├── africa/        (...)
+└── oceania/       (au.json, nz.json, ...)
+```
+
+Each file follows this schema:
 
 ```json
 {
@@ -61,7 +73,7 @@ Hierarchical subdivisions (e.g., Ireland where counties belong to provinces) use
 
 A Java class `SubdivisionCodeGenerator` in a separate `generator/` Maven module:
 
-- Reads all `*.json` files from the `data/` directory
+- Recursively reads all `*.json` files under the `data/` directory
 - Validates: duplicate codes, missing required fields, invalid parent references, JSON syntax errors
 - Emits `SubdivisionCode.java` — the full file including nested enums, the `SubdivisionCode` wrapper class, `getSubdivisions()` switch, `fromCode()`, `fromName()`, `find()`, `allValues()`, and all static lookup maps
 - Validation errors fail the build with a clear message referencing the file and specific issue
@@ -86,9 +98,14 @@ The project becomes a **multi-module Maven layout** to solve the compilation ord
 ```
 i18n/
 ├── pom.xml                    (parent POM, modules: generator, library)
-├── data/                      (one JSON file per country)
-│   ├── us.json
-│   ├── ie.json
+├── data/                      (JSON files grouped by continent)
+│   ├── north-america/
+│   │   ├── us.json
+│   │   ├── ca.json
+│   │   └── mx.json
+│   ├── europe/
+│   │   ├── ie.json
+│   │   └── ...
 │   └── ... (~200 countries)
 ├── generator/
 │   ├── pom.xml                (depends on Jackson 3)
@@ -104,7 +121,7 @@ i18n/
 ### Build flow
 
 1. `generator/` compiles → produces `generator.jar`
-2. `library/` → `generate-sources` phase → `exec-maven-plugin` runs generator JAR → reads `data/*.json` → writes `SubdivisionCode.java` to `target/generated-sources/`
+2. `library/` → `generate-sources` phase → `exec-maven-plugin` runs generator JAR → reads all `*.json` recursively under `data/` → writes `SubdivisionCode.java` to `target/generated-sources/`
 3. `library/` compiles with generated code included
 4. Tests run, verification passes, JAR produced
 
@@ -141,7 +158,7 @@ i18n/
 
 - Set up multi-module Maven layout
 - Build `SubdivisionCodeGenerator` with validation
-- Create JSON data files for the 8 existing countries, porting data from the current `SubdivisionCode.java`
+- Create continent subdirectories and JSON data files for the 8 existing countries, porting data from the current `SubdivisionCode.java`
 - Generate `SubdivisionCode.java`, verify byte-for-byte equivalent output
 - All existing tests pass with generated code
 
