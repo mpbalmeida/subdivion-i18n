@@ -70,8 +70,9 @@ class SubdivisionCodeGeneratorTest {
 
     @Test
     void testGenerate_producesCompilableOutput(@TempDir Path tempDir) throws Exception {
-        // Use the real test resource data
-        Path dataDir = Paths.get("src/test/resources/test-data/valid");
+        // Load test data directory from classpath to avoid CWD dependency
+        Path dataDir = Paths.get(
+                SubdivisionCodeGeneratorTest.class.getResource("/test-data/valid").toURI());
         Path outputDir = tempDir.resolve("output");
 
         SubdivisionCodeGenerator.main(new String[]{
