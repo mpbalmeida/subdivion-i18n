@@ -1,0 +1,25 @@
+{
+  "country": "PL",
+  "name": "Poland",
+  "wikipedia": "https://en.wikipedia.org/wiki/ISO_3166-2:PL",
+  "dateAdded": "2026-07-21",
+  "lastUpdated": "2026-07-21",
+  "subdivisions": [
+    {"code": "02", "name": "Dolnośląskie", "category": "Voivodship"},
+    {"code": "04", "name": "Kujawsko-Pomorskie", "category": "Voivodship"},
+    {"code": "06", "name": "Lubelskie", "category": "Voivodship"},
+    {"code": "08", "name": "Lubuskie", "category": "Voivodship"},
+    {"code": "10", "name": "Łódzkie", "category": "Voivodship"},
+    {"code": "12", "name": "Małopolskie", "category": "Voivodship"},
+    {"code": "14", "name": "Mazowieckie", "category": "Voivodship"},
+    {"code": "16", "name": "Opolskie", "category": "Voivodship"},
+    {"code": "18", "name": "Podkarpackie", "category": "Voivodship"},
+    {"code": "20", "name": "Podlaskie", "category": "Voivodship"},
+    {"code": "22", "name": "Pomorskie", "category": "Voivodship"},
+    {"code": "24", "name": "Śląskie", "category": "Voivodship"},
+    {"code": "26", "name": "Świętokrzyskie", "category": "Voivodship"},
+    {"code": "28", "name": "Warmińsko-Mazurskie", "category": "Voivodship"},
+    {"code": "30", "name": "Wielkopolskie", "category": "Voivodship"},
+    {"code": "32", "name": "Zachodniopomorskie", "category": "Voivodship"}
+  ]
+}
