@@ -1,0 +1,21 @@
+{
+  "country": "LU",
+  "name": "Luxembourg",
+  "wikipedia": "https://en.wikipedia.org/wiki/ISO_3166-2:LU",
+  "dateAdded": "2026-07-21",
+  "lastUpdated": "2026-07-21",
+  "subdivisions": [
+    {"code": "CA", "name": "Capellen", "category": "canton"},
+    {"code": "CL", "name": "Clervaux", "category": "canton"},
+    {"code": "DI", "name": "Diekirch", "category": "canton"},
+    {"code": "EC", "name": "Echternach", "category": "canton"},
+    {"code": "ES", "name": "Esch-sur-Alzette", "category": "canton"},
+    {"code": "GR", "name": "Grevenmacher", "category": "canton"},
+    {"code": "LU", "name": "Luxembourg", "category": "canton"},
+    {"code": "ME", "name": "Mersch", "category": "canton"},
+    {"code": "RD", "name": "Redange", "category": "canton"},
+    {"code": "RM", "name": "Remich", "category": "canton"},
+    {"code": "VD", "name": "Vianden", "category": "canton"},
+    {"code": "WI", "name": "Wiltz", "category": "canton"}
+  ]
+}
