@@ -88,4 +88,75 @@ class SubdivisionCodeGeneratorTest {
         assertTrue(content.contains("Alabama"));
         assertTrue(content.contains("public static Subdivision[] getSubdivisions(CountryCode code)"));
     }
+
+    @Test
+    void testGenerate_withAuditFields(@TempDir Path tempDir) throws Exception {
+        Path dataDir = Paths.get(
+                SubdivisionCodeGeneratorTest.class.getResource("/test-data/valid-with-audit").toURI());
+        Path outputDir = tempDir.resolve("output");
+
+        SubdivisionCodeGenerator.main(new String[]{
+                dataDir.toString(), outputDir.toString()
+        });
+
+        Path generated = outputDir.resolve("dev/marcosalmeida/i18n/SubdivisionCode.java");
+        String content = Files.readString(generated);
+
+        // Javadoc includes audit metadata
+        assertTrue(content.contains("Wikipedia: <a href=\"https://en.wikipedia.org/wiki/ISO_3166-2:US\">ISO 3166-2:US</a>"));
+        assertTrue(content.contains("Date added: 2026-07-21"));
+        assertTrue(content.contains("Last updated: 2026-07-21"));
+
+        // Static methods exist
+        assertTrue(content.contains("public static String wikipedia() { return \"https://en.wikipedia.org/wiki/ISO_3166-2:US\"; }"));
+        assertTrue(content.contains("public static String dateAdded() { return \"2026-07-21\"; }"));
+        assertTrue(content.contains("public static String lastUpdated() { return \"2026-07-21\"; }"));
+    }
+
+    @Test
+    void testGenerate_withoutAuditFields_producesNoAuditOutput(@TempDir Path tempDir) throws Exception {
+        Path dataDir = Paths.get(
+                SubdivisionCodeGeneratorTest.class.getResource("/test-data/valid").toURI());
+        Path outputDir = tempDir.resolve("output");
+
+        SubdivisionCodeGenerator.main(new String[]{
+                dataDir.toString(), outputDir.toString()
+        });
+
+        String content = Files.readString(outputDir.resolve("dev/marcosalmeida/i18n/SubdivisionCode.java"));
+
+        // No audit content in output
+        assertFalse(content.contains("Date added:"));
+        assertFalse(content.contains("Last updated:"));
+        assertFalse(content.contains("public static String wikipedia()"));
+        assertFalse(content.contains("public static String dateAdded()"));
+        assertFalse(content.contains("public static String lastUpdated()"));
+    }
+
+    @Test
+    void testGenerate_withPartialAuditFields(@TempDir Path tempDir) throws Exception {
+        // Create data with only wikipedia (no dates)
+        Path dataDir = tempDir.resolve("data");
+        Path continentDir = dataDir.resolve("europe");
+        Files.createDirectories(continentDir);
+        Files.writeString(continentDir.resolve("xx.json"),
+                "{\"country\":\"XX\",\"name\":\"TestLand\",\"wikipedia\":\"https://example.com/XX\"," +
+                "\"subdivisions\":[" +
+                "{\"code\":\"A\",\"name\":\"Alpha\",\"category\":\"thing\"}" +
+                "]}");
+
+        Path outputDir = tempDir.resolve("output");
+
+        SubdivisionCodeGenerator.main(new String[]{
+                dataDir.toString(), outputDir.toString()
+        });
+
+        String content = Files.readString(outputDir.resolve("dev/marcosalmeida/i18n/SubdivisionCode.java"));
+
+        // Wikipedia is present
+        assertTrue(content.contains("public static String wikipedia()"));
+        // Dates are absent
+        assertFalse(content.contains("dateAdded()"));
+        assertFalse(content.contains("lastUpdated()"));
+    }
 }
