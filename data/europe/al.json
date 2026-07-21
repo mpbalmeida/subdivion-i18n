@@ -1,0 +1,21 @@
+{
+  "country": "AL",
+  "name": "Albania",
+  "wikipedia": "https://en.wikipedia.org/wiki/ISO_3166-2:AL",
+  "dateAdded": "2026-07-21",
+  "lastUpdated": "2026-07-21",
+  "subdivisions": [
+    {"code": "01", "name": "Berat", "category": "county"},
+    {"code": "02", "name": "Durrës", "category": "county"},
+    {"code": "03", "name": "Elbasan", "category": "county"},
+    {"code": "04", "name": "Fier", "category": "county"},
+    {"code": "05", "name": "Gjirokastër", "category": "county"},
+    {"code": "06", "name": "Korçë", "category": "county"},
+    {"code": "07", "name": "Kukës", "category": "county"},
+    {"code": "08", "name": "Lezhë", "category": "county"},
+    {"code": "09", "name": "Dibër", "category": "county"},
+    {"code": "10", "name": "Shkodër", "category": "county"},
+    {"code": "11", "name": "Tiranë", "category": "county"},
+    {"code": "12", "name": "Vlorë", "category": "county"}
+  ]
+}
