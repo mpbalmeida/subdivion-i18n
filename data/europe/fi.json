@@ -1,0 +1,28 @@
+{
+  "country": "FI",
+  "name": "Finland",
+  "wikipedia": "https://en.wikipedia.org/wiki/ISO_3166-2:FI",
+  "dateAdded": "2026-07-21",
+  "lastUpdated": "2026-07-21",
+  "subdivisions": [
+    {"code": "01", "name": "Ahvenanmaan maakunta", "category": "region"},
+    {"code": "02", "name": "Etelä-Karjala", "category": "region"},
+    {"code": "03", "name": "Etelä-Pohjanmaa", "category": "region"},
+    {"code": "04", "name": "Etelä-Savo", "category": "region"},
+    {"code": "05", "name": "Kainuu", "category": "region"},
+    {"code": "06", "name": "Kanta-Häme", "category": "region"},
+    {"code": "07", "name": "Keski-Pohjanmaa", "category": "region"},
+    {"code": "08", "name": "Keski-Suomi", "category": "region"},
+    {"code": "09", "name": "Kymenlaakso", "category": "region"},
+    {"code": "10", "name": "Lappi", "category": "region"},
+    {"code": "11", "name": "Pirkanmaa", "category": "region"},
+    {"code": "12", "name": "Pohjanmaa", "category": "region"},
+    {"code": "13", "name": "Pohjois-Karjala", "category": "region"},
+    {"code": "14", "name": "Pohjois-Pohjanmaa", "category": "region"},
+    {"code": "15", "name": "Pohjois-Savo", "category": "region"},
+    {"code": "16", "name": "Päijät-Häme", "category": "region"},
+    {"code": "17", "name": "Satakunta", "category": "region"},
+    {"code": "18", "name": "Uusimaa", "category": "region"},
+    {"code": "19", "name": "Varsinais-Suomi", "category": "region"}
+  ]
+}
