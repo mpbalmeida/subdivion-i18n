@@ -195,17 +195,18 @@ Each new country gets a test class following the existing pattern (e.g., `Subdiv
 
 ## `add-market` Skill
 
-A project-level Claude Code slash command (`/add-market`) that automates adding a single country from end to end.
+A project-level Claude Code slash command (`/add-market`) that automates adding countries to the library. Supports two modes:
+
+- **Single country**: `/add-market DE` — adds one country
+- **Continent batch**: `/add-market Europe` — adds all countries in a continent (useful for bulk phases like Phase 2)
+
+The skill lives at `.claude/commands/add-market.md`.
 
 ### Why a skill instead of purely manual authoring
 
 ISO-3166-2 subdivision data lives on Wikipedia in a standardized tabular format. Having Claude fetch, parse, and author the JSON file is faster than manual transcription and less error-prone. The PR review gate ensures human oversight — the skill does the mechanical work, a human verifies the result.
 
-### Skill location
-
-`.claude/commands/add-market.md` — a markdown file containing the workflow instructions. Invoked as `/add-market <country-code>` (e.g., `/add-market DE`).
-
-### Workflow
+### Mode A: Single country (`/add-market DE`)
 
 ```
 /add-market DE
@@ -242,9 +243,49 @@ ISO-3166-2 subdivision data lives on Wikipedia in a standardized tabular format.
    - Commit: feat(data): add <Country> subdivisions
 ```
 
+### Mode B: Continent batch (`/add-market Europe`)
+
+```
+/add-market Europe
+    │
+    ▼
+1. DISCOVER — WebFetch the ISO-3166-2 page or the continent's Wikipedia category
+   listing all countries with subdivision codes (e.g., the Europe table at
+   https://en.wikipedia.org/wiki/ISO_3166-2). Extract the list of country codes
+   that belong to the continent.
+    │
+    ▼
+2. FILTER — Remove countries already in the library (check existing data/<continent>/*.json
+   and existing enums in SubdivisionCode.java). Also exclude countries with no
+   ISO-3166-2 subdivisions (e.g., Vatican City, Monaco — these have Wikipedia
+   pages but empty subdivision tables).
+    │
+    ▼
+3. FOR EACH country in the filtered list:
+   │
+   ├─ Run Mode A (single country workflow: fetch → analyze → create → test → verify loop)
+   │  Run these in batches of 5 to avoid overwhelming the build.
+   │  After each batch, run mvn verify --batch-mode.
+   │  Fix any failures within the batch before moving to the next batch.
+   │
+   ▼
+4. FINAL VERIFY — Full mvn verify --batch-mode with all new countries
+    │
+    ├─ PASS → proceed to step 5
+    └─ FAIL → analyze errors, fix, repeat step 4
+    │
+    ▼
+5. COMMIT — One branch, one commit with all new countries, push, open PR
+   - Branch: feat/add-<continent>-subdivisions
+   - Commit: feat(data): add <continent> subdivisions (~N countries)
+```
+
+**Batching rationale**: Running per-country and verifying per-batch keeps the feedback loop tight. If one country's data has a validation error, it's caught within its batch of 5 rather than after all 50 are written. Each batch acts as a checkpoint.
+
 ### Key instructions within the skill
 
-- **Continent mapping**: Determine which subdirectory the country belongs to (e.g., DE → `data/europe/`). Wikipedia infobox often includes the continent.
+- **Continent mapping for single mode**: Determine which subdirectory the country belongs to (e.g., DE → `data/europe/`). Wikipedia infobox often includes the continent. For transcontinental countries (Russia, Turkey), place in the continent where the majority of subdivisions lie.
+- **Country list discovery for batch mode**: Wikipedia's ISO-3166-2 main page has tables grouping countries by continent. Parse the country codes from the relevant continent's section.
 - **Category conventions**: Match existing conventions — lowercase for generic categories (`"state"`, `"province"`, `"county"`), Title Case for proper-noun categories (`"Province"`, `"Land"`). Use judgment based on existing files.
 - **Parent relationships**: If the Wikipedia table shows hierarchical subdivisions (e.g., Irish counties belong to provinces), use the `parent` field with the parent's code.
 - **Numeric codes**: Some countries (e.g., Italy's regions) have numeric subdivision codes. The generator already handles this with the `needsPrefix` detection — no special handling needed.
@@ -252,12 +293,22 @@ ISO-3166-2 subdivision data lives on Wikipedia in a standardized tabular format.
 - **Wikipedia link**: Format as `https://en.wikipedia.org/wiki/ISO_3166-2:<CC>`.
 - **Retry loop**: If `mvn verify` fails, analyze the test output and generator validation errors, fix the JSON data or test assertions, and re-run. Do not proceed to PR until the build is green.
 - **Test class pattern**: Match existing tests — verify all codes resolve, names match, categories are correct, parent relationships work, audit static methods return non-null strings.
+- **Update SubdivisionCodeTest**: Each new country must be added to the cross-cutting `SubdivisionCodeTest` assertions (verify `getSubdivisions()` count, `fromCode()` resolution, etc.).
 
 ### What the skill does NOT do
 
 - It does NOT auto-merge the PR — human review is the gate
 - It does NOT modify the `Subdivision` interface
 - It does NOT handle countries without Wikipedia ISO-3166-2 pages (those are done manually)
+- It does NOT auto-detect continent for single-country mode — uses Wikipedia infobox data
+
+### Future continent batch targets
+
+Once Europe is shipped, the same skill supports:
+- `/add-market Asia` — Phase 3
+- `/add-market Africa` — Phase 4
+- `/add-market South-America` — remaining Americas (Phase 5)
+- `/add-market Oceania` — remaining Oceania (Phase 4)
 
 ## Implementation Order
 
