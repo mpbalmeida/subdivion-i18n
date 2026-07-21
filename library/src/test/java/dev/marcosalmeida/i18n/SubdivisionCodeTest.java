@@ -44,6 +44,10 @@ public class SubdivisionCodeTest {
         assertNotNull(de);
         assertEquals(16, de.length);
 
+        Subdivision[] at = SubdivisionCode.getSubdivisions(CountryCode.AT);
+        assertNotNull(at);
+        assertEquals(9, at.length);
+
         assertNull(SubdivisionCode.getSubdivisions(CountryCode.AF));
     }
 
@@ -76,6 +80,10 @@ public class SubdivisionCodeTest {
         Subdivision deBy = SubdivisionCode.fromCode("DE-BY");
         assertNotNull(deBy);
         assertEquals("Bayern", deBy.getSubdivisionName());
+
+        Subdivision at9 = SubdivisionCode.fromCode("AT-9");
+        assertNotNull(at9);
+        assertEquals("Wien", at9.getSubdivisionName());
 
         // Test lookup by subdivision part (returns the first match, which is BR-AL for "AL")
         Subdivision alShort = SubdivisionCode.fromCode("AL");
@@ -115,8 +123,8 @@ public class SubdivisionCodeTest {
     @Test
     public void testGlobalFiltering() {
         Subdivision[] allStates = SubdivisionCode.getStates();
-        // 6 (AU) + 26 (BR) + 31 (MX) + 50 (US) = 113
-        assertEquals(113, allStates.length);
+        // 6 (AU) + 9 (AT) + 26 (BR) + 31 (MX) + 50 (US) = 122
+        assertEquals(122, allStates.length);
 
         Subdivision[] allRegions = SubdivisionCode.getRegions();
         // 15 (IT) + 16 (NZ) = 31

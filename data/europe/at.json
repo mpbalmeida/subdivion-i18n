@@ -1,0 +1,18 @@
+{
+  "country": "AT",
+  "name": "Austria",
+  "wikipedia": "https://en.wikipedia.org/wiki/ISO_3166-2:AT",
+  "dateAdded": "2026-07-21",
+  "lastUpdated": "2026-07-21",
+  "subdivisions": [
+    {"code": "1", "name": "Burgenland", "category": "state"},
+    {"code": "2", "name": "Kärnten", "category": "state"},
+    {"code": "3", "name": "Niederösterreich", "category": "state"},
+    {"code": "4", "name": "Oberösterreich", "category": "state"},
+    {"code": "5", "name": "Salzburg", "category": "state"},
+    {"code": "6", "name": "Steiermark", "category": "state"},
+    {"code": "7", "name": "Tirol", "category": "state"},
+    {"code": "8", "name": "Vorarlberg", "category": "state"},
+    {"code": "9", "name": "Wien", "category": "state"}
+  ]
+}
