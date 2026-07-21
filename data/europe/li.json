@@ -1,0 +1,20 @@
+{
+  "country": "LI",
+  "name": "Liechtenstein",
+  "wikipedia": "https://en.wikipedia.org/wiki/ISO_3166-2:LI",
+  "dateAdded": "2026-07-21",
+  "lastUpdated": "2026-07-21",
+  "subdivisions": [
+    {"code": "01", "name": "Balzers", "category": "commune"},
+    {"code": "02", "name": "Eschen", "category": "commune"},
+    {"code": "03", "name": "Gamprin", "category": "commune"},
+    {"code": "04", "name": "Mauren", "category": "commune"},
+    {"code": "05", "name": "Planken", "category": "commune"},
+    {"code": "06", "name": "Ruggell", "category": "commune"},
+    {"code": "07", "name": "Schaan", "category": "commune"},
+    {"code": "08", "name": "Schellenberg", "category": "commune"},
+    {"code": "09", "name": "Triesen", "category": "commune"},
+    {"code": "10", "name": "Triesenberg", "category": "commune"},
+    {"code": "11", "name": "Vaduz", "category": "commune"}
+  ]
+}

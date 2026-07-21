@@ -1,0 +1,22 @@
+{
+  "country": "BE",
+  "name": "Belgium",
+  "wikipedia": "https://en.wikipedia.org/wiki/ISO_3166-2:BE",
+  "dateAdded": "2026-07-21",
+  "lastUpdated": "2026-07-21",
+  "subdivisions": [
+    {"code": "BRU", "name": "Brussels", "category": "region"},
+    {"code": "VLG", "name": "Flanders", "category": "region"},
+    {"code": "VAN", "name": "Antwerp", "category": "province", "parent": "VLG"},
+    {"code": "VBR", "name": "Flemish Brabant", "category": "province", "parent": "VLG"},
+    {"code": "VLI", "name": "Limburg", "category": "province", "parent": "VLG"},
+    {"code": "VOV", "name": "East Flanders", "category": "province", "parent": "VLG"},
+    {"code": "VWV", "name": "West Flanders", "category": "province", "parent": "VLG"},
+    {"code": "WAL", "name": "Wallonia", "category": "region"},
+    {"code": "WBR", "name": "Walloon Brabant", "category": "province", "parent": "WAL"},
+    {"code": "WHT", "name": "Hainaut", "category": "province", "parent": "WAL"},
+    {"code": "WLG", "name": "Liège", "category": "province", "parent": "WAL"},
+    {"code": "WLX", "name": "Luxembourg", "category": "province", "parent": "WAL"},
+    {"code": "WNA", "name": "Namur", "category": "province", "parent": "WAL"}
+  ]
+}

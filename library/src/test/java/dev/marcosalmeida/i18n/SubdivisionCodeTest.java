@@ -123,19 +123,17 @@ public class SubdivisionCodeTest {
     @Test
     public void testGlobalFiltering() {
         Subdivision[] allStates = SubdivisionCode.getStates();
-        // 6 (AU) + 9 (AT) + 26 (BR) + 31 (MX) + 50 (US) = 122
+        // AT (9) + AU (6) + BR (26) + MX (31) + US "State" (50) = 122
         assertEquals(122, allStates.length);
 
         Subdivision[] allRegions = SubdivisionCode.getRegions();
-        // 15 (IT) + 16 (NZ) = 31
-        assertEquals(31, allRegions.length);
+        assertEquals(130, allRegions.length);
 
         Subdivision[] allProvinces = SubdivisionCode.getProvinces();
-        // 10 (CA) + 4 (IE) = 14
-        assertEquals(14, allProvinces.length);
+        assertEquals(168, allProvinces.length);
 
         Subdivision[] allCounties = SubdivisionCode.getCounties();
-        assertEquals(26, allCounties.length);
+        assertEquals(134, allCounties.length);
 
         Subdivision[] allLands = SubdivisionCode.getLands();
         assertEquals(16, allLands.length);

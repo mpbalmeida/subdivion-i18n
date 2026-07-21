@@ -1,0 +1,22 @@
+{
+  "country": "NO",
+  "name": "Norway",
+  "wikipedia": "https://en.wikipedia.org/wiki/ISO_3166-2:NO",
+  "dateAdded": "2026-07-21",
+  "lastUpdated": "2026-07-21",
+  "subdivisions": [
+    {"code": "03", "name": "Oslo", "category": "county"},
+    {"code": "11", "name": "Rogaland", "category": "county"},
+    {"code": "15", "name": "Møre og Romsdal", "category": "county"},
+    {"code": "18", "name": "Nordland", "category": "county"},
+    {"code": "21", "name": "Svalbard", "category": "arctic region"},
+    {"code": "22", "name": "Jan Mayen", "category": "arctic region"},
+    {"code": "30", "name": "Viken", "category": "county"},
+    {"code": "34", "name": "Innlandet", "category": "county"},
+    {"code": "38", "name": "Vestfold og Telemark", "category": "county"},
+    {"code": "42", "name": "Agder", "category": "county"},
+    {"code": "46", "name": "Vestland", "category": "county"},
+    {"code": "50", "name": "Trøndelag", "category": "county"},
+    {"code": "54", "name": "Troms og Finnmark", "category": "county"}
+  ]
+}

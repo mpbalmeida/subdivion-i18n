@@ -1,0 +1,14 @@
+{
+  "country": "GL",
+  "name": "Greenland",
+  "wikipedia": "https://en.wikipedia.org/wiki/ISO_3166-2:GL",
+  "dateAdded": "2026-07-21",
+  "lastUpdated": "2026-07-21",
+  "subdivisions": [
+    {"code": "AV", "name": "Avannaata", "category": "municipality"},
+    {"code": "KU", "name": "Kujalleq", "category": "municipality"},
+    {"code": "QE", "name": "Qeqqata", "category": "municipality"},
+    {"code": "QT", "name": "Qeqertalik", "category": "municipality"},
+    {"code": "SM", "name": "Sermersooq", "category": "municipality"}
+  ]
+}

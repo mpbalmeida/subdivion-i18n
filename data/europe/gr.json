@@ -1,0 +1,23 @@
+{
+  "country": "GR",
+  "name": "Greece",
+  "wikipedia": "https://en.wikipedia.org/wiki/ISO_3166-2:GR",
+  "dateAdded": "2026-07-21",
+  "lastUpdated": "2026-07-21",
+  "subdivisions": [
+    {"code": "69", "name": "Mount Athos", "category": "self-governed part"},
+    {"code": "A", "name": "Eastern Macedonia and Thrace", "category": "administrative region"},
+    {"code": "B", "name": "Central Macedonia", "category": "administrative region"},
+    {"code": "C", "name": "Western Macedonia", "category": "administrative region"},
+    {"code": "D", "name": "Epirus", "category": "administrative region"},
+    {"code": "E", "name": "Thessaly", "category": "administrative region"},
+    {"code": "F", "name": "Ionian Islands", "category": "administrative region"},
+    {"code": "G", "name": "Western Greece", "category": "administrative region"},
+    {"code": "H", "name": "Central Greece", "category": "administrative region"},
+    {"code": "I", "name": "Attica", "category": "administrative region"},
+    {"code": "J", "name": "Peloponnese", "category": "administrative region"},
+    {"code": "K", "name": "North Aegean", "category": "administrative region"},
+    {"code": "L", "name": "South Aegean", "category": "administrative region"},
+    {"code": "M", "name": "Crete", "category": "administrative region"}
+  ]
+}

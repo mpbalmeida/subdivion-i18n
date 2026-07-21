@@ -1,0 +1,12 @@
+{
+  "country": "BA",
+  "name": "Bosnia and Herzegovina",
+  "wikipedia": "https://en.wikipedia.org/wiki/ISO_3166-2:BA",
+  "dateAdded": "2026-07-21",
+  "lastUpdated": "2026-07-21",
+  "subdivisions": [
+    {"code": "BIH", "name": "Federation of Bosnia and Herzegovina", "category": "entity"},
+    {"code": "BRC", "name": "Brčko District", "category": "district with special status"},
+    {"code": "SRP", "name": "Republika Srpska", "category": "entity"}
+  ]
+}

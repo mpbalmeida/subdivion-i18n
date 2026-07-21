@@ -1,0 +1,20 @@
+{
+  "country": "AM",
+  "name": "Armenia",
+  "wikipedia": "https://en.wikipedia.org/wiki/ISO_3166-2:AM",
+  "dateAdded": "2026-07-21",
+  "lastUpdated": "2026-07-21",
+  "subdivisions": [
+    {"code": "AG", "name": "Aragatsotn", "category": "region"},
+    {"code": "AR", "name": "Ararat", "category": "region"},
+    {"code": "AV", "name": "Armavir", "category": "region"},
+    {"code": "ER", "name": "Yerevan", "category": "city"},
+    {"code": "GR", "name": "Gegharkunik", "category": "region"},
+    {"code": "KT", "name": "Kotayk", "category": "region"},
+    {"code": "LO", "name": "Lori", "category": "region"},
+    {"code": "SH", "name": "Shirak", "category": "region"},
+    {"code": "SU", "name": "Syunik", "category": "region"},
+    {"code": "TV", "name": "Tavush", "category": "region"},
+    {"code": "VD", "name": "Vayots Dzor", "category": "region"}
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "country": "SK",
+  "name": "Slovakia",
+  "wikipedia": "https://en.wikipedia.org/wiki/ISO_3166-2:SK",
+  "dateAdded": "2026-07-21",
+  "lastUpdated": "2026-07-21",
+  "subdivisions": [
+    {"code": "BC", "name": "Banskobystrický kraj", "category": "region"},
+    {"code": "BL", "name": "Bratislavský kraj", "category": "region"},
+    {"code": "KI", "name": "Košický kraj", "category": "region"},
+    {"code": "NI", "name": "Nitriansky kraj", "category": "region"},
+    {"code": "PV", "name": "Prešovský kraj", "category": "region"},
+    {"code": "TA", "name": "Trnavský kraj", "category": "region"},
+    {"code": "TC", "name": "Trenčiansky kraj", "category": "region"},
+    {"code": "ZI", "name": "Žilinský kraj", "category": "region"}
+  ]
+}

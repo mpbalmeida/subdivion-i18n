@@ -1,0 +1,14 @@
+{
+  "country": "DK",
+  "name": "Denmark",
+  "wikipedia": "https://en.wikipedia.org/wiki/ISO_3166-2:DK",
+  "dateAdded": "2026-07-21",
+  "lastUpdated": "2026-07-21",
+  "subdivisions": [
+    {"code": "81", "name": "Nordjylland", "category": "region"},
+    {"code": "82", "name": "Midtjylland", "category": "region"},
+    {"code": "83", "name": "Syddanmark", "category": "region"},
+    {"code": "84", "name": "Hovedstaden", "category": "region"},
+    {"code": "85", "name": "Sjælland", "category": "region"}
+  ]
+}

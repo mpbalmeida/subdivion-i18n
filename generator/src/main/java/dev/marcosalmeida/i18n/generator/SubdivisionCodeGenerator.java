@@ -478,13 +478,21 @@ public class SubdivisionCodeGenerator {
 
     // Map category singular → method name for irregular plurals
     private static final Map<String, String> CATEGORY_METHOD_NAMES = Map.ofEntries(
+            Map.entry("autonomous city", "getAutonomousCities"),
+            Map.entry("autonomous community", "getAutonomousCommunities"),
+            Map.entry("city", "getCities"),
             Map.entry("county", "getCounties"),
-            Map.entry("territory", "getTerritories"),
+            Map.entry("country", "getCountries"),
+            Map.entry("dependency", "getDependencies"),
+            Map.entry("entity", "getEntities"),
+            Map.entry("federal city", "getFederalCities"),
             Map.entry("federal entity", "getFederalEntities"),
             Map.entry("federal district", "getFederalDistricts"),
             Map.entry("autonomous region", "getAutonomousRegions"),
+            Map.entry("municipality", "getMunicipalities"),
             Map.entry("outlying area", "getOutlyingAreas"),
-            Map.entry("special island authority", "getSpecialIslandAuthorities")
+            Map.entry("special island authority", "getSpecialIslandAuthorities"),
+            Map.entry("territory", "getTerritories")
     );
 
     static String categoryToMethodName(String category) {
@@ -493,14 +501,26 @@ public class SubdivisionCodeGenerator {
             return CATEGORY_METHOD_NAMES.get(lower);
         }
         // Default: "state" → "getStates", "region" → "getRegions", "province" → "getProvinces"
-        String[] words = lower.split(" ");
+        String[] words = lower.split("[ -]");
         StringBuilder sb = new StringBuilder("get");
-        for (String word : words) {
+        for (int i = 0; i < words.length; i++) {
+            String word = words[i];
             sb.append(Character.toUpperCase(word.charAt(0)));
             sb.append(word.substring(1));
         }
-        sb.append("s");
+        // Handle words ending in consonant + "y" → "ies" (e.g., collectivity → collectivities)
+        String lastWord = words[words.length - 1];
+        if (lastWord.endsWith("y") && lastWord.length() > 1 && !isVowel(lastWord.charAt(lastWord.length() - 2))) {
+            sb.setLength(sb.length() - 1);
+            sb.append("ies");
+        } else {
+            sb.append("s");
+        }
         return sb.toString();
+    }
+
+    private static boolean isVowel(char c) {
+        return "aeiou".indexOf(Character.toLowerCase(c)) >= 0;
     }
 
     static String categoryToDisplayPlural(String category) {

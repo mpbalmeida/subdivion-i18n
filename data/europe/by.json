@@ -1,0 +1,16 @@
+{
+  "country": "BY",
+  "name": "Belarus",
+  "wikipedia": "https://en.wikipedia.org/wiki/ISO_3166-2:BY",
+  "dateAdded": "2026-07-21",
+  "lastUpdated": "2026-07-21",
+  "subdivisions": [
+    {"code": "BR", "name": "Brest", "category": "oblast"},
+    {"code": "HM", "name": "Minsk City", "category": "city"},
+    {"code": "HO", "name": "Gomel", "category": "oblast"},
+    {"code": "HR", "name": "Grodno", "category": "oblast"},
+    {"code": "MA", "name": "Mogilev", "category": "oblast"},
+    {"code": "MI", "name": "Minsk", "category": "oblast"},
+    {"code": "VI", "name": "Vitebsk", "category": "oblast"}
+  ]
+}

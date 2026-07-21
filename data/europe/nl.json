@@ -1,0 +1,27 @@
+{
+  "country": "NL",
+  "name": "Netherlands",
+  "wikipedia": "https://en.wikipedia.org/wiki/ISO_3166-2:NL",
+  "dateAdded": "2026-07-21",
+  "lastUpdated": "2026-07-21",
+  "subdivisions": [
+    {"code": "AW", "name": "Aruba", "category": "country"},
+    {"code": "BQ1", "name": "Bonaire", "category": "special municipality"},
+    {"code": "BQ2", "name": "Saba", "category": "special municipality"},
+    {"code": "BQ3", "name": "Sint Eustatius", "category": "special municipality"},
+    {"code": "CW", "name": "Curaçao", "category": "country"},
+    {"code": "DR", "name": "Drenthe", "category": "province"},
+    {"code": "FL", "name": "Flevoland", "category": "province"},
+    {"code": "FR", "name": "Fryslân", "category": "province"},
+    {"code": "GE", "name": "Gelderland", "category": "province"},
+    {"code": "GR", "name": "Groningen", "category": "province"},
+    {"code": "LI", "name": "Limburg", "category": "province"},
+    {"code": "NB", "name": "Noord-Brabant", "category": "province"},
+    {"code": "NH", "name": "Noord-Holland", "category": "province"},
+    {"code": "OV", "name": "Overijssel", "category": "province"},
+    {"code": "SX", "name": "Sint Maarten", "category": "country"},
+    {"code": "UT", "name": "Utrecht", "category": "province"},
+    {"code": "ZE", "name": "Zeeland", "category": "province"},
+    {"code": "ZH", "name": "Zuid-Holland", "category": "province"}
+  ]
+}

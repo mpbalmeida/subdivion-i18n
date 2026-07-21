@@ -1,0 +1,26 @@
+{
+  "country": "MC",
+  "name": "Monaco",
+  "wikipedia": "https://en.wikipedia.org/wiki/ISO_3166-2:MC",
+  "dateAdded": "2026-07-21",
+  "lastUpdated": "2026-07-21",
+  "subdivisions": [
+    {"code": "CL", "name": "La Colle", "category": "quarter"},
+    {"code": "CO", "name": "La Condamine", "category": "quarter"},
+    {"code": "FO", "name": "Fontvieille", "category": "quarter"},
+    {"code": "GA", "name": "La Gare", "category": "quarter"},
+    {"code": "JE", "name": "Jardin Exotique", "category": "quarter"},
+    {"code": "LA", "name": "Larvotto", "category": "quarter"},
+    {"code": "MA", "name": "Malbousquet", "category": "quarter"},
+    {"code": "MC", "name": "Monte-Carlo", "category": "quarter"},
+    {"code": "MG", "name": "Moneghetti", "category": "quarter"},
+    {"code": "MO", "name": "Monaco-Ville", "category": "quarter"},
+    {"code": "MU", "name": "Moulins", "category": "quarter"},
+    {"code": "PH", "name": "Port-Hercule", "category": "quarter"},
+    {"code": "SD", "name": "Sainte-Dévote", "category": "quarter"},
+    {"code": "SO", "name": "La Source", "category": "quarter"},
+    {"code": "SP", "name": "Spélugues", "category": "quarter"},
+    {"code": "SR", "name": "Saint-Roman", "category": "quarter"},
+    {"code": "VR", "name": "Vallon de la Rousse", "category": "quarter"}
+  ]
+}
