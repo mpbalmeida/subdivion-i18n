@@ -73,27 +73,39 @@ Add one or more ISO-3166-2 countries to the i18n library. Supports single countr
    - Region name: same approach, filter by region column or section
    - Explicit array: parse the comma-separated list directly
    - Filter out: countries already in the library (check `data/<continent>/*.json`), countries with no ISO-3166-2 subdivisions
-2. **Plan** — Create a TaskCreate entry per country. Name each task with the country code and name.
+2. **Plan** — Create the batch branch and task list:
+   ```bash
+   git checkout -b feat/add-<batch-name>-subdivisions
+   ```
+   Create a TaskCreate entry per country. Name each task with the country code and name.
 3. **Dispatch** — Spin sub-agents in parallel batches of 5:
-   - Each sub-agent runs Mode A (single country workflow)
+   - Each sub-agent runs Mode A (single country workflow, **but skips creating its own branch/PR** — just creates data + test files)
    - Default model: `haiku` for simple flat subdivisions, `sonnet` for hierarchical/complex countries
+   - After each sub-agent completes, immediately commit its files to the batch branch:
+     ```bash
+     git add data/<continent>/<cc>.json library/src/test/java/dev/marcosalmeida/i18n/Subdivision<CC>Test.java
+     git commit -m "feat(data): add <Country Name> subdivisions"
+     ```
+   - Sub-agents should NOT modify `SubdivisionCodeTest.java` — that is updated centrally in the Converge step
    - After each batch of 5 completes, run `mvn verify --batch-mode` as a checkpoint
    - Fix any failures within the batch before moving to the next
    - Update task status (pending → in_progress → completed) via TaskUpdate
-4. **Converge** — After all batches:
+4. **Update SubdivisionCodeTest** — After all countries are dispatched, update `SubdivisionCodeTest.java`:
+   - `testGetSubdivisions()` — add assertion for each new country code and count
+   - `testFromCode()` — add a fromCode assertion for each new country
+   - `testGlobalFiltering()` — update counts for any global category methods affected
+5. **Converge** — After all batches and SubdivisionCodeTest update:
    - Run full `mvn verify --batch-mode`
    - Fix any remaining failures
    - Loop until green
-5. **Commit & PR** — Single branch, single commit:
+6. **PR** — Push and create PR:
    ```bash
-   git checkout -b feat/add-<batch-name>-subdivisions
-   git add data/ library/src/test/
-   git commit -m "feat(data): add <N> <batch-name> subdivisions"
    git push -u origin feat/add-<batch-name>-subdivisions
    gh pr create --title "feat(data): add <N> <batch-name> subdivisions" --body "Adds ISO-3166-2 subdivisions for <N> countries in <batch-name>.
 
    🤖 Generated with [Claude Code](https://claude.com/claude-code)"
    ```
+   - The branch should already be created in the Plan step with all commits in place
 
 ## Conventions
 
