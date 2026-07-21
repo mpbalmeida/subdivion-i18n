@@ -1,0 +1,18 @@
+{
+  "country": "SM",
+  "name": "San Marino",
+  "wikipedia": "https://en.wikipedia.org/wiki/ISO_3166-2:SM",
+  "dateAdded": "2026-07-21",
+  "lastUpdated": "2026-07-21",
+  "subdivisions": [
+    {"code": "01", "name": "Acquaviva", "category": "municipality"},
+    {"code": "02", "name": "Chiesanuova", "category": "municipality"},
+    {"code": "03", "name": "Domagnano", "category": "municipality"},
+    {"code": "04", "name": "Faetano", "category": "municipality"},
+    {"code": "05", "name": "Fiorentino", "category": "municipality"},
+    {"code": "06", "name": "Borgo Maggiore", "category": "municipality"},
+    {"code": "07", "name": "Città di San Marino", "category": "municipality"},
+    {"code": "08", "name": "Montegiardino", "category": "municipality"},
+    {"code": "09", "name": "Serravalle", "category": "municipality"}
+  ]
+}
