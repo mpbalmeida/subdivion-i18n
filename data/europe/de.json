@@ -1,0 +1,25 @@
+{
+  "country": "DE",
+  "name": "Germany",
+  "wikipedia": "https://en.wikipedia.org/wiki/ISO_3166-2:DE",
+  "dateAdded": "2026-07-21",
+  "lastUpdated": "2026-07-21",
+  "subdivisions": [
+    {"code": "BB", "name": "Brandenburg", "category": "Land"},
+    {"code": "BE", "name": "Berlin", "category": "Land"},
+    {"code": "BW", "name": "Baden-Württemberg", "category": "Land"},
+    {"code": "BY", "name": "Bayern", "category": "Land"},
+    {"code": "HB", "name": "Bremen", "category": "Land"},
+    {"code": "HE", "name": "Hessen", "category": "Land"},
+    {"code": "HH", "name": "Hamburg", "category": "Land"},
+    {"code": "MV", "name": "Mecklenburg-Vorpommern", "category": "Land"},
+    {"code": "NI", "name": "Niedersachsen", "category": "Land"},
+    {"code": "NW", "name": "Nordrhein-Westfalen", "category": "Land"},
+    {"code": "RP", "name": "Rheinland-Pfalz", "category": "Land"},
+    {"code": "SH", "name": "Schleswig-Holstein", "category": "Land"},
+    {"code": "SL", "name": "Saarland", "category": "Land"},
+    {"code": "SN", "name": "Sachsen", "category": "Land"},
+    {"code": "ST", "name": "Sachsen-Anhalt", "category": "Land"},
+    {"code": "TH", "name": "Thüringen", "category": "Land"}
+  ]
+}

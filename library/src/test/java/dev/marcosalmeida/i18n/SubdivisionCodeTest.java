@@ -40,6 +40,10 @@ public class SubdivisionCodeTest {
         assertNotNull(nz);
         assertEquals(17, nz.length);
 
+        Subdivision[] de = SubdivisionCode.getSubdivisions(CountryCode.DE);
+        assertNotNull(de);
+        assertEquals(16, de.length);
+
         assertNull(SubdivisionCode.getSubdivisions(CountryCode.AF));
     }
 
@@ -68,6 +72,10 @@ public class SubdivisionCodeTest {
         Subdivision ieD = SubdivisionCode.fromCode("IE-D");
         assertNotNull(ieD);
         assertEquals("Dublin", ieD.getSubdivisionName());
+
+        Subdivision deBy = SubdivisionCode.fromCode("DE-BY");
+        assertNotNull(deBy);
+        assertEquals("Bayern", deBy.getSubdivisionName());
 
         // Test lookup by subdivision part (returns the first match, which is BR-AL for "AL")
         Subdivision alShort = SubdivisionCode.fromCode("AL");
@@ -120,5 +128,8 @@ public class SubdivisionCodeTest {
 
         Subdivision[] allCounties = SubdivisionCode.getCounties();
         assertEquals(26, allCounties.length);
+
+        Subdivision[] allLands = SubdivisionCode.getLands();
+        assertEquals(16, allLands.length);
     }
 }
