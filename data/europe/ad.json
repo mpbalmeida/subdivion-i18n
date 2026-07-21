@@ -1,0 +1,16 @@
+{
+  "country": "AD",
+  "name": "Andorra",
+  "wikipedia": "https://en.wikipedia.org/wiki/ISO_3166-2:AD",
+  "dateAdded": "2026-07-21",
+  "lastUpdated": "2026-07-21",
+  "subdivisions": [
+    {"code": "02", "name": "Canillo", "category": "parish"},
+    {"code": "03", "name": "Encamp", "category": "parish"},
+    {"code": "04", "name": "La Massana", "category": "parish"},
+    {"code": "05", "name": "Ordino", "category": "parish"},
+    {"code": "06", "name": "Sant Julià de Lòria", "category": "parish"},
+    {"code": "07", "name": "Andorra la Vella", "category": "parish"},
+    {"code": "08", "name": "Escaldes-Engordany", "category": "parish", "parent": "07"}
+  ]
+}
