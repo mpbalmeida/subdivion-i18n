@@ -478,6 +478,8 @@ public class SubdivisionCodeGenerator {
 
     // Map category singular → method name for irregular plurals
     private static final Map<String, String> CATEGORY_METHOD_NAMES = Map.ofEntries(
+            Map.entry("autonomous city", "getAutonomousCities"),
+            Map.entry("autonomous community", "getAutonomousCommunities"),
             Map.entry("city", "getCities"),
             Map.entry("county", "getCounties"),
             Map.entry("federal city", "getFederalCities"),
