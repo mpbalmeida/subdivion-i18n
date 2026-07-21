@@ -1,0 +1,15 @@
+{
+  "country": "CY",
+  "name": "Cyprus",
+  "wikipedia": "https://en.wikipedia.org/wiki/ISO_3166-2:CY",
+  "dateAdded": "2026-07-21",
+  "lastUpdated": "2026-07-21",
+  "subdivisions": [
+    {"code": "01", "name": "Nicosia", "category": "district"},
+    {"code": "02", "name": "Limassol", "category": "district"},
+    {"code": "03", "name": "Larnaca", "category": "district"},
+    {"code": "04", "name": "Famagusta", "category": "district"},
+    {"code": "05", "name": "Paphos", "category": "district"},
+    {"code": "06", "name": "Kyrenia", "category": "district"}
+  ]
+}
