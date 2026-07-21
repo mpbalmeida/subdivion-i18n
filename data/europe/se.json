@@ -1,0 +1,30 @@
+{
+  "country": "SE",
+  "name": "Sweden",
+  "wikipedia": "https://en.wikipedia.org/wiki/ISO_3166-2:SE",
+  "dateAdded": "2026-07-21",
+  "lastUpdated": "2026-07-21",
+  "subdivisions": [
+    {"code": "AB", "name": "Stockholms län", "category": "county"},
+    {"code": "AC", "name": "Västerbottens län", "category": "county"},
+    {"code": "BD", "name": "Norrbottens län", "category": "county"},
+    {"code": "C", "name": "Uppsala län", "category": "county"},
+    {"code": "D", "name": "Södermanlands län", "category": "county"},
+    {"code": "E", "name": "Östergötlands län", "category": "county"},
+    {"code": "F", "name": "Jönköpings län", "category": "county"},
+    {"code": "G", "name": "Kronobergs län", "category": "county"},
+    {"code": "H", "name": "Kalmar län", "category": "county"},
+    {"code": "I", "name": "Gotlands län", "category": "county"},
+    {"code": "K", "name": "Blekinge län", "category": "county"},
+    {"code": "M", "name": "Skåne län", "category": "county"},
+    {"code": "N", "name": "Hallands län", "category": "county"},
+    {"code": "O", "name": "Västra Götalands län", "category": "county"},
+    {"code": "S", "name": "Värmlands län", "category": "county"},
+    {"code": "T", "name": "Örebro län", "category": "county"},
+    {"code": "U", "name": "Västmanlands län", "category": "county"},
+    {"code": "W", "name": "Dalarnas län", "category": "county"},
+    {"code": "X", "name": "Gävleborgs län", "category": "county"},
+    {"code": "Y", "name": "Västernorrlands län", "category": "county"},
+    {"code": "Z", "name": "Jämtlands län", "category": "county"}
+  ]
+}
