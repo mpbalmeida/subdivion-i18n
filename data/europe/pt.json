@@ -1,0 +1,29 @@
+{
+  "country": "PT",
+  "name": "Portugal",
+  "wikipedia": "https://en.wikipedia.org/wiki/ISO_3166-2:PT",
+  "dateAdded": "2026-07-21",
+  "lastUpdated": "2026-07-21",
+  "subdivisions": [
+    {"code": "01", "name": "Aveiro", "category": "district"},
+    {"code": "02", "name": "Beja", "category": "district"},
+    {"code": "03", "name": "Braga", "category": "district"},
+    {"code": "04", "name": "Bragança", "category": "district"},
+    {"code": "05", "name": "Castelo Branco", "category": "district"},
+    {"code": "06", "name": "Coimbra", "category": "district"},
+    {"code": "07", "name": "Évora", "category": "district"},
+    {"code": "08", "name": "Faro", "category": "district"},
+    {"code": "09", "name": "Guarda", "category": "district"},
+    {"code": "10", "name": "Leiria", "category": "district"},
+    {"code": "11", "name": "Lisboa", "category": "district"},
+    {"code": "12", "name": "Portalegre", "category": "district"},
+    {"code": "13", "name": "Porto", "category": "district"},
+    {"code": "14", "name": "Santarém", "category": "district"},
+    {"code": "15", "name": "Setúbal", "category": "district"},
+    {"code": "16", "name": "Viana do Castelo", "category": "district"},
+    {"code": "17", "name": "Vila Real", "category": "district"},
+    {"code": "18", "name": "Viseu", "category": "district"},
+    {"code": "20", "name": "Região Autónoma dos Açores", "category": "autonomous region"},
+    {"code": "30", "name": "Região Autónoma da Madeira", "category": "autonomous region"}
+  ]
+}
