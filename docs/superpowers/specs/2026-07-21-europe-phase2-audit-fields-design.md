@@ -245,42 +245,74 @@ ISO-3166-2 subdivision data lives on Wikipedia in a standardized tabular format.
 
 ### Mode B: Continent batch (`/add-market Europe`)
 
+The batch mode uses multi-agent orchestration: discover all countries, create a task plan, fan out sub-agents in parallel, then converge and verify.
+
 ```
 /add-market Europe
     │
     ▼
-1. DISCOVER — WebFetch the ISO-3166-2 page or the continent's Wikipedia category
-   listing all countries with subdivision codes (e.g., the Europe table at
-   https://en.wikipedia.org/wiki/ISO_3166-2). Extract the list of country codes
-   that belong to the continent.
+1. DISCOVER — Map the batch to a concrete list of country codes:
+   - Continent name ("Europe") → fetch Wikipedia ISO-3166-2 page, extract all
+     country codes in the continent's table
+   - Region name ("Southeast Asia") → same approach, filter by region
+   - Explicit array ("DE,FR,ES") → parse directly, no fetch needed
+   - Filter out: countries already in the library, countries with no subdivisions
     │
     ▼
-2. FILTER — Remove countries already in the library (check existing data/<continent>/*.json
-   and existing enums in SubdivisionCode.java). Also exclude countries with no
-   ISO-3166-2 subdivisions (e.g., Vatican City, Monaco — these have Wikipedia
-   pages but empty subdivision tables).
+2. PLAN — Create a task per country using TaskCreate:
+   ┌─────────────────────────────────────────────┐
+   │ Task 1: Add DE (Germany)        [pending]   │
+   │ Task 2: Add FR (France)         [pending]   │
+   │ Task 3: Add ES (Spain)          [pending]   │
+   │ ...                                         │
+   │ Task N: Add PL (Poland)         [pending]   │
+   └─────────────────────────────────────────────┘
     │
     ▼
-3. FOR EACH country in the filtered list:
-   │
-   ├─ Run Mode A (single country workflow: fetch → analyze → create → test → verify loop)
-   │  Run these in batches of 5 to avoid overwhelming the build.
-   │  After each batch, run mvn verify --batch-mode.
-   │  Fix any failures within the batch before moving to the next batch.
-   │
-   ▼
-4. FINAL VERIFY — Full mvn verify --batch-mode with all new countries
-    │
-    ├─ PASS → proceed to step 5
-    └─ FAIL → analyze errors, fix, repeat step 4
+3. DISPATCH — Spin sub-agents in parallel batches:
+   ┌──────────────────────────────────────────────┐
+   │ Batch 1 (5 agents, parallel):                │
+   │   agent-1: /add-market DE  (model: haiku)    │
+   │   agent-2: /add-market FR  (model: haiku)    │
+   │   agent-3: /add-market ES  (model: haiku)    │
+   │   agent-4: /add-market NL  (model: haiku)    │
+   │   agent-5: /add-market BE  (model: haiku)    │
+   │                                              │
+   │ Wait for all 5 → mvn verify → fix if needed  │
+   │                                              │
+   │ Batch 2 (5 agents, parallel):                │
+   │   agent-6: /add-market PL  (model: haiku)    │
+   │   ...                                        │
+   └──────────────────────────────────────────────┘
     │
     ▼
-5. COMMIT — One branch, one commit with all new countries, push, open PR
-   - Branch: feat/add-<continent>-subdivisions
-   - Commit: feat(data): add <continent> subdivisions (~N countries)
+4. CONVERGE — After all batches complete:
+   - Run full mvn verify --batch-mode
+   - Fix any failures (re-dispatch individual country agents as needed)
+   - Loop until green
+    │
+    ▼
+5. COMMIT — One branch, one commit, push, open PR
+   - Branch: feat/add-<batch-name>-subdivisions
+   - Commit: feat(data): add <N> <batch-name> subdivisions
 ```
 
-**Batching rationale**: Running per-country and verifying per-batch keeps the feedback loop tight. If one country's data has a validation error, it's caught within its batch of 5 rather than after all 50 are written. Each batch acts as a checkpoint.
+**Model selection per sub-agent**:
+
+| Task complexity | Model | Rationale |
+|---|---|---|
+| Simple flat subdivisions, single category | `haiku` | Cheap, fast — most countries fall here |
+| Hierarchical subdivisions with parents | `sonnet` | Needs careful parent-child mapping |
+| Complex multi-category, unusual structure | `sonnet` | More categories = more edges to get right |
+| Unusual edge cases (numeric codes, special territories) | `opus` | Needs deeper reasoning |
+
+The orchestrator (main agent) uses `sonnet` or `opus` to coordinate. Sub-agents default to `haiku` unless the country's Wikipedia page reveals complexity that warrants a bump.
+
+**Batching strategy**:
+- Batch size of 5 keeps the feedback loop tight — if one country has a validation error, it's caught within its batch
+- Each batch is a checkpoint: `mvn verify` runs after every batch completes
+- Batch size can be tuned: use 3 for complex countries (many subdivisions, hierarchy), 8 for simple ones
+- The orchestrator tracks task status (pending → in_progress → completed) via TaskUpdate
 
 ### Key instructions within the skill
 
