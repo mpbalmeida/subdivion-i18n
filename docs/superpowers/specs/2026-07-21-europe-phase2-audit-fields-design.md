@@ -190,13 +190,79 @@ Each new country gets a test class following the existing pattern (e.g., `Subdiv
 
 - Modifying the `Subdivision` interface
 - Per-subdivision audit fields (country-level only)
-- Auto-scraping data from Wikipedia (manual JSON authoring)
 - Backfilling audit fields for the 8 existing countries (can be done later)
 - Format validation for wikipedia URLs or date strings
+
+## `add-market` Skill
+
+A project-level Claude Code slash command (`/add-market`) that automates adding a single country from end to end.
+
+### Why a skill instead of purely manual authoring
+
+ISO-3166-2 subdivision data lives on Wikipedia in a standardized tabular format. Having Claude fetch, parse, and author the JSON file is faster than manual transcription and less error-prone. The PR review gate ensures human oversight — the skill does the mechanical work, a human verifies the result.
+
+### Skill location
+
+`.claude/commands/add-market.md` — a markdown file containing the workflow instructions. Invoked as `/add-market <country-code>` (e.g., `/add-market DE`).
+
+### Workflow
+
+```
+/add-market DE
+    │
+    ▼
+1. FETCH — WebFetch: https://en.wikipedia.org/wiki/ISO_3166-2:DE
+    │
+    ▼
+2. ANALYZE — Extract from the page:
+   - Country name
+   - Continent (to determine data/ subdirectory)
+   - Subdivision table: code, name, category, parent (if hierarchical)
+    │
+    ▼
+3. CREATE — Write JSON file:
+   - data/<continent>/<cc>.json with wikipedia, dateAdded, lastUpdated
+   - Subdivisions ordered alphabetically by code
+   - Use lowercase categories for generic types, Title Case for proper types
+    │
+    ▼
+4. TEST — Create test class + update SubdivisionCodeTest
+   - library/src/test/java/.../Subdivision<CC>Test.java
+   - Follow existing test class patterns
+    │
+    ▼
+5. VERIFY — Run: mvn verify --batch-mode
+    │
+    ├─ PASS → proceed to step 6
+    └─ FAIL → analyze errors, fix JSON or test, repeat step 5
+    │
+    ▼
+6. COMMIT — Create branch, commit, push, open PR
+   - Branch: feat/add-<cc>-subdivisions
+   - Commit: feat(data): add <Country> subdivisions
+```
+
+### Key instructions within the skill
+
+- **Continent mapping**: Determine which subdirectory the country belongs to (e.g., DE → `data/europe/`). Wikipedia infobox often includes the continent.
+- **Category conventions**: Match existing conventions — lowercase for generic categories (`"state"`, `"province"`, `"county"`), Title Case for proper-noun categories (`"Province"`, `"Land"`). Use judgment based on existing files.
+- **Parent relationships**: If the Wikipedia table shows hierarchical subdivisions (e.g., Irish counties belong to provinces), use the `parent` field with the parent's code.
+- **Numeric codes**: Some countries (e.g., Italy's regions) have numeric subdivision codes. The generator already handles this with the `needsPrefix` detection — no special handling needed.
+- **Date fields**: `dateAdded` and `lastUpdated` both set to today's date.
+- **Wikipedia link**: Format as `https://en.wikipedia.org/wiki/ISO_3166-2:<CC>`.
+- **Retry loop**: If `mvn verify` fails, analyze the test output and generator validation errors, fix the JSON data or test assertions, and re-run. Do not proceed to PR until the build is green.
+- **Test class pattern**: Match existing tests — verify all codes resolve, names match, categories are correct, parent relationships work, audit static methods return non-null strings.
+
+### What the skill does NOT do
+
+- It does NOT auto-merge the PR — human review is the gate
+- It does NOT modify the `Subdivision` interface
+- It does NOT handle countries without Wikipedia ISO-3166-2 pages (those are done manually)
 
 ## Implementation Order
 
 1. **Jackson 3 migration** — update `generator/pom.xml` and imports; verify `mvn verify` passes
 2. **Audit fields in the generator** — add fields to `CountryData.java`, update `SubdivisionCodeGenerator.java`, add generator tests
-3. **Europe data files** — create ~50 JSON files with audit fields, add country test classes, expand `SubdivisionCodeTest`
-4. **Verification** — full `mvn verify` with all ~58 countries passing
+3. **`add-market` skill** — create `.claude/commands/add-market.md` with the workflow instructions
+4. **Europe data files** — create ~50 JSON files with audit fields, add country test classes, expand `SubdivisionCodeTest` (each country added via the `add-market` skill)
+5. **Verification** — full `mvn verify` with all ~58 countries passing
