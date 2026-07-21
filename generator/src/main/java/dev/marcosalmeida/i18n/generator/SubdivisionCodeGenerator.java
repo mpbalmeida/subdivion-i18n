@@ -226,6 +226,16 @@ public class SubdivisionCodeGenerator {
 
         out.println("    /**");
         out.println("     * ISO-3166-2 subdivisions for " + name + ".");
+        if (country.getWikipedia() != null && !country.getWikipedia().isBlank()) {
+            out.println("     *");
+            out.println("     * <p>Wikipedia: <a href=\"" + country.getWikipedia() + "\">ISO 3166-2:" + code + "</a></p>");
+        }
+        if (country.getDateAdded() != null && !country.getDateAdded().isBlank()) {
+            out.println("     * <p>Date added: " + country.getDateAdded() + "</p>");
+        }
+        if (country.getLastUpdated() != null && !country.getLastUpdated().isBlank()) {
+            out.println("     * <p>Last updated: " + country.getLastUpdated() + "</p>");
+        }
         out.println("     */");
         out.println("    public enum " + code + " implements Subdivision {");
 
@@ -351,6 +361,32 @@ public class SubdivisionCodeGenerator {
             out.println();
         }
 
+        // Audit static methods
+        if (country.getWikipedia() != null && !country.getWikipedia().isBlank()) {
+            out.println();
+            out.println("        /**");
+            out.println("         * Returns the Wikipedia page for this country's ISO-3166-2 subdivisions.");
+            out.println("         * @return the Wikipedia URL.");
+            out.println("         */");
+            out.println("        public static String wikipedia() { return \"" + escape(country.getWikipedia()) + "\"; }");
+        }
+        if (country.getDateAdded() != null && !country.getDateAdded().isBlank()) {
+            out.println();
+            out.println("        /**");
+            out.println("         * Returns the date this country was added to the library (ISO-8601).");
+            out.println("         * @return the date added.");
+            out.println("         */");
+            out.println("        public static String dateAdded() { return \"" + escape(country.getDateAdded()) + "\"; }");
+        }
+        if (country.getLastUpdated() != null && !country.getLastUpdated().isBlank()) {
+            out.println();
+            out.println("        /**");
+            out.println("         * Returns the date this country's subdivision data was last updated (ISO-8601).");
+            out.println("         * @return the date last updated.");
+            out.println("         */");
+            out.println("        public static String lastUpdated() { return \"" + escape(country.getLastUpdated()) + "\"; }");
+        }
+
         out.println("    }");
         out.println();
     }
@@ -472,5 +508,11 @@ public class SubdivisionCodeGenerator {
         String methodName = categoryToMethodName(category);
         // Strip the "get" prefix and lowercase the first char
         return Character.toLowerCase(methodName.charAt(3)) + methodName.substring(4);
+    }
+
+    private static String escape(String s) {
+        return s.replace("\\", "\\\\")
+                .replace("\"", "\\\"")
+                .replace("\n", "\\n");
     }
 }
