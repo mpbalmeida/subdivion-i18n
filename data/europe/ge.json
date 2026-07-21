@@ -1,0 +1,21 @@
+{
+  "country": "GE",
+  "name": "Georgia",
+  "wikipedia": "https://en.wikipedia.org/wiki/ISO_3166-2:GE",
+  "dateAdded": "2026-07-21",
+  "lastUpdated": "2026-07-21",
+  "subdivisions": [
+    {"code": "AB", "name": "Abkhazia", "category": "autonomous republic"},
+    {"code": "AJ", "name": "Adjara", "category": "autonomous republic"},
+    {"code": "GU", "name": "Guria", "category": "region"},
+    {"code": "IM", "name": "Imereti", "category": "region"},
+    {"code": "KA", "name": "K'akheti", "category": "region"},
+    {"code": "KK", "name": "Kvemo Kartli", "category": "region"},
+    {"code": "MM", "name": "Mtskheta-Mtianeti", "category": "region"},
+    {"code": "RL", "name": "Rach'a-Lechkhumi-Kvemo Svaneti", "category": "region"},
+    {"code": "SJ", "name": "Samtskhe-Javakheti", "category": "region"},
+    {"code": "SK", "name": "Shida Kartli", "category": "region"},
+    {"code": "SZ", "name": "Samegrelo-Zemo Svaneti", "category": "region"},
+    {"code": "TB", "name": "Tbilisi", "category": "city"}
+  ]
+}
