@@ -146,7 +146,7 @@ public class SubdivisionFRTest {
         Subdivision[] overseasColl = SubdivisionCode.FR.getOverseasCollectivities();
         assertEquals(5, overseasColl.length);
 
-        Subdivision[] dependencies = SubdivisionCode.FR.getDependencys();
+        Subdivision[] dependencies = SubdivisionCode.FR.getDependencies();
         assertEquals(1, dependencies.length);
         assertEquals("FR-CP", dependencies[0].getCode());
 
@@ -154,7 +154,7 @@ public class SubdivisionFRTest {
         assertEquals(1, overseasSpecial.length);
         assertEquals("FR-NC", overseasSpecial[0].getCode());
 
-        Subdivision[] overseasTerr = SubdivisionCode.FR.getOverseasTerritorys();
+        Subdivision[] overseasTerr = SubdivisionCode.FR.getOverseasTerritories();
         assertEquals(1, overseasTerr.length);
         assertEquals("FR-TF", overseasTerr[0].getCode());
 

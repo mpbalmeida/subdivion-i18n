@@ -89,7 +89,7 @@ public class SubdivisionAZTest {
         assertEquals(1, autonomousRepublics.length);
         assertEquals(SubdivisionCode.AZ.NX, autonomousRepublics[0]);
 
-        Subdivision[] municipalities = SubdivisionCode.AZ.getMunicipalitys();
+        Subdivision[] municipalities = SubdivisionCode.AZ.getMunicipalities();
         assertEquals(11, municipalities.length);
 
         Subdivision[] rayons = SubdivisionCode.AZ.getRayons();

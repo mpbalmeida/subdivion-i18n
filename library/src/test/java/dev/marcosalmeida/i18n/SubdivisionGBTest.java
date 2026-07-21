@@ -184,14 +184,14 @@ public class SubdivisionGBTest {
         Subdivision[] groupings = SubdivisionCode.GB.getGroupings();
         assertEquals(3, groupings.length);
 
-        Subdivision[] countries = SubdivisionCode.GB.getCountrys();
+        Subdivision[] countries = SubdivisionCode.GB.getCountries();
         assertEquals(3, countries.length);
 
         Subdivision[] provinces = SubdivisionCode.GB.getProvinces();
         assertEquals(1, provinces.length);
         assertEquals("GB-NIR", provinces[0].getCode());
 
-        Subdivision[] twoTierCounties = SubdivisionCode.GB.getTwoTierCountys();
+        Subdivision[] twoTierCounties = SubdivisionCode.GB.getTwoTierCounties();
         assertEquals(25, twoTierCounties.length);
 
         Subdivision[] cityCorporations = SubdivisionCode.GB.getCityCorporations();
@@ -204,7 +204,7 @@ public class SubdivisionGBTest {
         Subdivision[] metropolitanDistricts = SubdivisionCode.GB.getMetropolitanDistricts();
         assertEquals(36, metropolitanDistricts.length);
 
-        Subdivision[] unitaryAuthorities = SubdivisionCode.GB.getUnitaryAuthoritys();
+        Subdivision[] unitaryAuthorities = SubdivisionCode.GB.getUnitaryAuthorities();
         assertEquals(80, unitaryAuthorities.length);
 
         Subdivision[] districts = SubdivisionCode.GB.getDistricts();

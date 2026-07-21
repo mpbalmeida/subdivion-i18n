@@ -101,7 +101,7 @@ public class SubdivisionHUTest {
             assertNotEquals(SubdivisionCode.HU.DE, s);
         }
 
-        Subdivision[] capitalCities = SubdivisionCode.HU.getCapitalCitys();
+        Subdivision[] capitalCities = SubdivisionCode.HU.getCapitalCities();
         assertEquals(1, capitalCities.length);
         assertEquals("HU-BU", capitalCities[0].getCode());
 

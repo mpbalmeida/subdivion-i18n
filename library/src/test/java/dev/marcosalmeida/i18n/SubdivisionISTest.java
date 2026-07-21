@@ -83,7 +83,7 @@ public class SubdivisionISTest {
         Subdivision[] regions = SubdivisionCode.IS.getRegions();
         assertEquals(8, regions.length);
 
-        Subdivision[] municipalities = SubdivisionCode.IS.getMunicipalitys();
+        Subdivision[] municipalities = SubdivisionCode.IS.getMunicipalities();
         assertEquals(64, municipalities.length);
 
         Subdivision capitalRegion = SubdivisionCode.IS.IS_1;

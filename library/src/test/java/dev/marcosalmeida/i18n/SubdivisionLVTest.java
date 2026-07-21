@@ -71,10 +71,10 @@ public class SubdivisionLVTest {
 
     @Test
     public void testFiltering() {
-        Subdivision[] municipalities = SubdivisionCode.LV.getMunicipalitys();
+        Subdivision[] municipalities = SubdivisionCode.LV.getMunicipalities();
         assertEquals(36, municipalities.length);
 
-        Subdivision[] stateCities = SubdivisionCode.LV.getStateCitys();
+        Subdivision[] stateCities = SubdivisionCode.LV.getStateCities();
         assertEquals(7, stateCities.length);
     }
 

@@ -106,10 +106,10 @@ public class SubdivisionNLTest {
         Subdivision[] provinces = SubdivisionCode.NL.getProvinces();
         assertEquals(12, provinces.length);
 
-        Subdivision[] countries = SubdivisionCode.NL.getCountrys();
+        Subdivision[] countries = SubdivisionCode.NL.getCountries();
         assertEquals(3, countries.length);
 
-        Subdivision[] specialMunicipalities = SubdivisionCode.NL.getSpecialMunicipalitys();
+        Subdivision[] specialMunicipalities = SubdivisionCode.NL.getSpecialMunicipalities();
         assertEquals(3, specialMunicipalities.length);
 
         // Verify a province is in the filtered results

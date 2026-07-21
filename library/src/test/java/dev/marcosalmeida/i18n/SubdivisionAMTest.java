@@ -68,7 +68,7 @@ public class SubdivisionAMTest {
         Subdivision[] regions = SubdivisionCode.AM.getRegions();
         assertEquals(10, regions.length);
 
-        Subdivision[] cities = SubdivisionCode.AM.getCitys();
+        Subdivision[] cities = SubdivisionCode.AM.getCities();
         assertEquals(1, cities.length);
     }
 

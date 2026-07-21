@@ -73,7 +73,7 @@ public class SubdivisionROTest {
         Subdivision[] departments = SubdivisionCode.RO.getDepartments();
         assertEquals(41, departments.length);
 
-        Subdivision[] municipalities = SubdivisionCode.RO.getMunicipalitys();
+        Subdivision[] municipalities = SubdivisionCode.RO.getMunicipalities();
         assertEquals(1, municipalities.length);
         assertEquals(SubdivisionCode.RO.B, municipalities[0]);
     }

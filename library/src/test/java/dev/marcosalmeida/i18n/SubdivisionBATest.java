@@ -8,7 +8,7 @@ public class SubdivisionBATest {
 
     @Test
     public void testBASubdivisions() {
-        SubdivisionCode.BA fBiH = SubdivisionCode.BA.BA_BIH;
+        SubdivisionCode.BA fBiH = SubdivisionCode.BA.BIH;
         assertEquals("BA-BIH", fBiH.getCode());
         assertEquals("Federation of Bosnia and Herzegovina", fBiH.getSubdivisionName());
         assertEquals("entity", fBiH.getCategory());
@@ -26,7 +26,7 @@ public class SubdivisionBATest {
         assertEquals("Republika Srpska", last.getSubdivisionName());
         assertEquals("entity", last.getCategory());
 
-        Subdivision brcko = SubdivisionCode.BA.BA_BRC;
+        Subdivision brcko = SubdivisionCode.BA.BRC;
         assertEquals("BA-BRC", brcko.getCode());
         assertEquals("Brčko District", brcko.getSubdivisionName());
         assertEquals("district with special status", brcko.getCategory());
@@ -35,10 +35,10 @@ public class SubdivisionBATest {
     @Test
     public void testFromCode() {
         SubdivisionCode.BA srp = SubdivisionCode.BA.fromCode("BA-SRP");
-        assertEquals(SubdivisionCode.BA.BA_SRP, srp);
+        assertEquals(SubdivisionCode.BA.SRP, srp);
 
         SubdivisionCode.BA brc = SubdivisionCode.BA.fromCode("BRC");
-        assertEquals(SubdivisionCode.BA.BA_BRC, brc);
+        assertEquals(SubdivisionCode.BA.BRC, brc);
 
         assertThrows(IllegalArgumentException.class, () -> SubdivisionCode.BA.fromCode("INVALID"));
     }
@@ -46,10 +46,10 @@ public class SubdivisionBATest {
     @Test
     public void testFromName() {
         Subdivision fBiH = SubdivisionCode.BA.fromName("Federation of Bosnia and Herzegovina").orElseThrow();
-        assertEquals(SubdivisionCode.BA.BA_BIH, fBiH);
+        assertEquals(SubdivisionCode.BA.BIH, fBiH);
 
         Subdivision brcko = SubdivisionCode.BA.fromName("brčko district").orElseThrow();
-        assertEquals(SubdivisionCode.BA.BA_BRC, brcko);
+        assertEquals(SubdivisionCode.BA.BRC, brcko);
 
         assertTrue(SubdivisionCode.BA.fromName("Invalid").isEmpty());
     }
@@ -57,26 +57,26 @@ public class SubdivisionBATest {
     @Test
     public void testFind() {
         Subdivision bih = SubdivisionCode.BA.find("BIH").orElseThrow();
-        assertEquals(SubdivisionCode.BA.BA_BIH, bih);
+        assertEquals(SubdivisionCode.BA.BIH, bih);
 
         Subdivision bihFull = SubdivisionCode.BA.find("BA-BIH").orElseThrow();
-        assertEquals(SubdivisionCode.BA.BA_BIH, bihFull);
+        assertEquals(SubdivisionCode.BA.BIH, bihFull);
 
         Subdivision republikaSrpska = SubdivisionCode.BA.find("Republika Srpska").orElseThrow();
-        assertEquals(SubdivisionCode.BA.BA_SRP, republikaSrpska);
+        assertEquals(SubdivisionCode.BA.SRP, republikaSrpska);
 
         assertTrue(SubdivisionCode.BA.find("Invalid").isEmpty());
     }
 
     @Test
     public void testHierarchy() {
-        Subdivision fBiH = SubdivisionCode.BA.BA_BIH;
+        Subdivision fBiH = SubdivisionCode.BA.BIH;
         assertFalse(fBiH.getParent().isPresent());
 
-        Subdivision srp = SubdivisionCode.BA.BA_SRP;
+        Subdivision srp = SubdivisionCode.BA.SRP;
         assertFalse(srp.getParent().isPresent());
 
-        Subdivision brcko = SubdivisionCode.BA.BA_BRC;
+        Subdivision brcko = SubdivisionCode.BA.BRC;
         assertFalse(brcko.getParent().isPresent());
     }
 
@@ -89,10 +89,10 @@ public class SubdivisionBATest {
         boolean hasBiH = false;
         boolean hasSRP = false;
         for (Subdivision s : entities) {
-            if (s.equals(SubdivisionCode.BA.BA_BIH)) {
+            if (s.equals(SubdivisionCode.BA.BIH)) {
                 hasBiH = true;
             }
-            if (s.equals(SubdivisionCode.BA.BA_SRP)) {
+            if (s.equals(SubdivisionCode.BA.SRP)) {
                 hasSRP = true;
             }
         }

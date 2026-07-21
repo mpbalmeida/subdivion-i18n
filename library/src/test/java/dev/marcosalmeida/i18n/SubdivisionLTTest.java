@@ -8,7 +8,7 @@ public class SubdivisionLTTest {
 
     @Test
     public void testLTSubdivisions() {
-        SubdivisionCode.LT alytusCounty = SubdivisionCode.LT.AL;
+        SubdivisionCode.LT alytusCounty = SubdivisionCode.LT.LT_AL;
         assertEquals("LT-AL", alytusCounty.getCode());
         assertEquals("Alytus County", alytusCounty.getSubdivisionName());
         assertEquals("county", alytusCounty.getCategory());
@@ -35,11 +35,11 @@ public class SubdivisionLTTest {
     @Test
     public void testFromCode() {
         SubdivisionCode.LT alytus = SubdivisionCode.LT.fromCode("LT-AL");
-        assertEquals(SubdivisionCode.LT.AL, alytus);
+        assertEquals(SubdivisionCode.LT.LT_AL, alytus);
 
         // Test lookup by subdivision part
         SubdivisionCode.LT vilnius = SubdivisionCode.LT.fromCode("VL");
-        assertEquals(SubdivisionCode.LT.VL, vilnius);
+        assertEquals(SubdivisionCode.LT.LT_VL, vilnius);
 
         assertThrows(IllegalArgumentException.class, () -> SubdivisionCode.LT.fromCode("INVALID"));
     }
@@ -47,10 +47,10 @@ public class SubdivisionLTTest {
     @Test
     public void testFromName() {
         Subdivision sauliaiCounty = SubdivisionCode.LT.fromName("Šiauliai County").orElseThrow();
-        assertEquals(SubdivisionCode.LT.SA, sauliaiCounty);
+        assertEquals(SubdivisionCode.LT.LT_SA, sauliaiCounty);
 
         Subdivision kaunasCounty = SubdivisionCode.LT.fromName("kaunas county").orElseThrow();
-        assertEquals(SubdivisionCode.LT.KU, kaunasCounty);
+        assertEquals(SubdivisionCode.LT.LT_KU, kaunasCounty);
 
         assertTrue(SubdivisionCode.LT.fromName("Invalid").isEmpty());
     }
@@ -58,13 +58,13 @@ public class SubdivisionLTTest {
     @Test
     public void testFind() {
         Subdivision al = SubdivisionCode.LT.find("AL").orElseThrow();
-        assertEquals(SubdivisionCode.LT.AL, al);
+        assertEquals(SubdivisionCode.LT.LT_AL, al);
 
         Subdivision alFull = SubdivisionCode.LT.find("LT-AL").orElseThrow();
-        assertEquals(SubdivisionCode.LT.AL, alFull);
+        assertEquals(SubdivisionCode.LT.LT_AL, alFull);
 
         Subdivision alytusCounty = SubdivisionCode.LT.find("Alytus County").orElseThrow();
-        assertEquals(SubdivisionCode.LT.AL, alytusCounty);
+        assertEquals(SubdivisionCode.LT.LT_AL, alytusCounty);
 
         assertTrue(SubdivisionCode.LT.find("Invalid").isEmpty());
     }
@@ -73,27 +73,27 @@ public class SubdivisionLTTest {
     public void testHierarchy() {
         Subdivision vilniusMiestas = SubdivisionCode.LT.LT_57;
         assertTrue(vilniusMiestas.getParent().isPresent());
-        assertEquals(SubdivisionCode.LT.VL, vilniusMiestas.getParent().get());
+        assertEquals(SubdivisionCode.LT.LT_VL, vilniusMiestas.getParent().get());
 
-        Subdivision vilniusCounty = SubdivisionCode.LT.VL;
+        Subdivision vilniusCounty = SubdivisionCode.LT.LT_VL;
         assertFalse(vilniusCounty.getParent().isPresent());
     }
 
     @Test
     public void testFiltering() {
-        Subdivision[] counties = SubdivisionCode.LT.getCountys();
+        Subdivision[] counties = SubdivisionCode.LT.getCounties();
         assertEquals(10, counties.length);
 
-        Subdivision[] cityMunicipalities = SubdivisionCode.LT.getCityMunicipalitys();
+        Subdivision[] cityMunicipalities = SubdivisionCode.LT.getCityMunicipalities();
         assertEquals(7, cityMunicipalities.length);
 
-        Subdivision[] districtMunicipalities = SubdivisionCode.LT.getDistrictMunicipalitys();
+        Subdivision[] districtMunicipalities = SubdivisionCode.LT.getDistrictMunicipalities();
         assertEquals(44, districtMunicipalities.length);
 
-        Subdivision[] municipalities = SubdivisionCode.LT.getMunicipalitys();
+        Subdivision[] municipalities = SubdivisionCode.LT.getMunicipalities();
         assertEquals(9, municipalities.length);
 
-        Subdivision vilniusCounty = SubdivisionCode.LT.VL;
+        Subdivision vilniusCounty = SubdivisionCode.LT.LT_VL;
         Subdivision[] vilniusCountyMunicipalities = SubdivisionCode.LT.getByParent(vilniusCounty);
         assertEquals(8, vilniusCountyMunicipalities.length);
 

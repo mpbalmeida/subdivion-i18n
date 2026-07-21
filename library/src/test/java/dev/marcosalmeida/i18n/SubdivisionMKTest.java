@@ -65,7 +65,7 @@ public class SubdivisionMKTest {
 
     @Test
     public void testFiltering() {
-        Subdivision[] municipalities = SubdivisionCode.MK.getMunicipalitys();
+        Subdivision[] municipalities = SubdivisionCode.MK.getMunicipalities();
         assertEquals(80, municipalities.length);
     }
 

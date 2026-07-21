@@ -70,10 +70,10 @@ public class SubdivisionSITest {
 
     @Test
     public void testFiltering() {
-        Subdivision[] municipalities = SubdivisionCode.SI.getMunicipalitys();
+        Subdivision[] municipalities = SubdivisionCode.SI.getMunicipalities();
         assertEquals(200, municipalities.length);
 
-        Subdivision[] urbanMunicipalities = SubdivisionCode.SI.getUrbanMunicipalitys();
+        Subdivision[] urbanMunicipalities = SubdivisionCode.SI.getUrbanMunicipalities();
         assertEquals(12, urbanMunicipalities.length);
     }
 

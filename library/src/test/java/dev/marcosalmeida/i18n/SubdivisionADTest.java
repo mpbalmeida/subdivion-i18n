@@ -75,7 +75,7 @@ public class SubdivisionADTest {
 
     @Test
     public void testFiltering() {
-        Subdivision[] parishes = SubdivisionCode.AD.getParishes();
+        Subdivision[] parishes = SubdivisionCode.AD.getParishs();
         assertEquals(7, parishes.length);
 
         // Test getByParent

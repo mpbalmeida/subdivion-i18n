@@ -110,12 +110,11 @@ public class SubdivisionBETest {
 
     @Test
     public void testAuditFields() {
-        Subdivision s = SubdivisionCode.BE.BRU;
-        assertNotNull(s.wikipedia());
-        assertFalse(s.wikipedia().isBlank());
-        assertNotNull(s.dateAdded());
-        assertFalse(s.dateAdded().isBlank());
-        assertNotNull(s.lastUpdated());
-        assertFalse(s.lastUpdated().isBlank());
+        assertNotNull(SubdivisionCode.BE.wikipedia());
+        assertFalse(SubdivisionCode.BE.wikipedia().isBlank());
+        assertNotNull(SubdivisionCode.BE.dateAdded());
+        assertFalse(SubdivisionCode.BE.dateAdded().isBlank());
+        assertNotNull(SubdivisionCode.BE.lastUpdated());
+        assertFalse(SubdivisionCode.BE.lastUpdated().isBlank());
     }
 }
