@@ -1,6 +1,6 @@
 package dev.marcosalmeida.i18n.generator;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -45,12 +45,7 @@ public class SubdivisionCodeGenerator {
 
             for (Path file : jsonFiles) {
                 String fileName = dataDir.relativize(file).toString(); // e.g., "europe/ie.json"
-                CountryData country;
-                try {
-                    country = mapper.readValue(file.toFile(), CountryData.class);
-                } catch (IOException e) {
-                    throw new IOException(fileName + ": JSON parse error: " + e.getMessage(), e);
-                }
+                CountryData country = mapper.readValue(file.toFile(), CountryData.class);
 
                 // Validate required fields
                 if (country.getCountry() == null || country.getCountry().isBlank()) {
