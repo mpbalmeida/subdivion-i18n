@@ -6,9 +6,9 @@
   "lastUpdated": "2026-07-21",
   "subdivisions": [
     {"code": "BRU", "name": "Brussels", "category": "region"},
+    {"code": "VLG", "name": "Flanders", "category": "region"},
     {"code": "VAN", "name": "Antwerp", "category": "province", "parent": "VLG"},
     {"code": "VBR", "name": "Flemish Brabant", "category": "province", "parent": "VLG"},
-    {"code": "VLG", "name": "Flanders", "category": "region"},
     {"code": "VLI", "name": "Limburg", "category": "province", "parent": "VLG"},
     {"code": "VOV", "name": "East Flanders", "category": "province", "parent": "VLG"},
     {"code": "VWV", "name": "West Flanders", "category": "province", "parent": "VLG"},
