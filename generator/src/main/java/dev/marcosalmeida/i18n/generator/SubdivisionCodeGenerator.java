@@ -493,7 +493,7 @@ public class SubdivisionCodeGenerator {
             return CATEGORY_METHOD_NAMES.get(lower);
         }
         // Default: "state" → "getStates", "region" → "getRegions", "province" → "getProvinces"
-        String[] words = lower.split(" ");
+        String[] words = lower.split("[ -]");
         StringBuilder sb = new StringBuilder("get");
         for (String word : words) {
             sb.append(Character.toUpperCase(word.charAt(0)));
