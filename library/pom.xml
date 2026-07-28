@@ -13,7 +13,7 @@
     <artifactId>i18n</artifactId>
     <name>i18n</name>
     <description>Internationalization utilities for Java, focusing on subdivision ISO-3166-2 codes.</description>
-    <url>https://github.com/mpbalmeida/i18n</url>
+    <url>https://github.com/mpbalmeida/subdivion-i18n</url>
 
     <developers>
         <developer>
@@ -25,9 +25,9 @@
     </developers>
 
     <scm>
-        <connection>scm:git:git://github.com/mpbalmeida/i18n.git</connection>
-        <developerConnection>scm:git:ssh://github.com/mpbalmeida/i18n.git</developerConnection>
-        <url>https://github.com/mpbalmeida/i18n</url>
+        <connection>scm:git:git://github.com/mpbalmeida/subdivion-i18n.git</connection>
+        <developerConnection>scm:git:ssh://github.com/mpbalmeida/subdivion-i18n.git</developerConnection>
+        <url>https://github.com/mpbalmeida/subdivion-i18n</url>
     </scm>
 
     <licenses>
