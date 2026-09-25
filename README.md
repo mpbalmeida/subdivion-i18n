@@ -155,12 +155,107 @@ public interface Subdivision {
 - **`nv-i18n` Integration**: Easily find subdivisions using established `CountryCode` constants.
 - **Shortened Keys**: Enum constants use the subdivision part of the code (e.g., `PR`) for a cleaner API.
 
+## Code Generation
+
+`SubdivisionCode` is not hand-written. It is generated at build time from the JSON data files
+under [`data/`](data) by the `i18n-generator` module, which is also published to Maven Central
+as [`dev.marcosalmeida:i18n-generator`](https://central.sonatype.com/artifact/dev.marcosalmeida/i18n-generator).
+
+The `library` module runs the generator automatically during `generate-sources`, so building
+the project regenerates `SubdivisionCode.java` into `target/generated-sources/java`. The
+generated file is never committed.
+
+### Data file format
+
+Each country is one JSON file at `data/<continent>/<cc>.json`:
+
+```json
+{
+  "country": "US",
+  "name": "United States",
+  "wikipedia": "https://en.wikipedia.org/wiki/ISO_3166-2:US",
+  "dateAdded": "2026-01-01",
+  "lastUpdated": "2026-01-01",
+  "subdivisions": [
+    {"code": "AL", "name": "Alabama", "category": "state"},
+    {"code": "AK", "name": "Alaska", "category": "state"}
+  ]
+}
+```
+
+| Field | Required | Description |
+|---|---|---|
+| `country` | yes | ISO 3166-1 alpha-2 code; becomes the generated enum's name |
+| `name` | yes | Human-readable country name, used in the generated Javadoc |
+| `wikipedia` | no | URL to the country's ISO 3166-2 page |
+| `dateAdded` | no | ISO-8601 date the country's data was first added |
+| `lastUpdated` | no | ISO-8601 date the data was last revised |
+| `subdivisions[].code` | yes | Subdivision part of the code, without the country prefix |
+| `subdivisions[].name` | yes | Subdivision name as published in ISO 3166-2 |
+| `subdivisions[].category` | yes | Lowercase for generic types (`state`), Title Case for proper nouns (`Land`) |
+| `subdivisions[].parent` | no | Code of another subdivision in the same file, for hierarchical countries |
+
+Countries are emitted alphabetically by code, and subdivisions keep the order they appear in the
+file — so list them alphabetically by code. Every category in the data produces a matching
+filter method on the generated enum; adding a new category therefore adds a new public method.
+
+The generator validates each file before writing any output and fails the build on a missing
+required field, a lowercase country code, a duplicate country or subdivision code, or a
+`parent` that does not resolve within the same file.
+
+### Running the generator yourself
+
+To generate subdivisions for your own data — for example a fork covering countries this library
+does not ship — depend on the generator and run it over a data directory:
+
+```xml
+<plugin>
+    <groupId>org.codehaus.mojo</groupId>
+    <artifactId>exec-maven-plugin</artifactId>
+    <version>3.6.3</version>
+    <executions>
+        <execution>
+            <id>generate-subdivision-code</id>
+            <phase>generate-sources</phase>
+            <goals><goal>java</goal></goals>
+            <configuration>
+                <mainClass>dev.marcosalmeida.i18n.generator.SubdivisionCodeGenerator</mainClass>
+                <arguments>
+                    <argument>${project.basedir}/data</argument>
+                    <argument>${project.build.directory}/generated-sources/java</argument>
+                </arguments>
+                <includeProjectDependencies>true</includeProjectDependencies>
+            </configuration>
+        </execution>
+    </executions>
+</plugin>
+```
+
+Add the output directory as a source root with `build-helper-maven-plugin` (as `library/pom.xml`
+does), or run it directly from the command line:
+
+```bash
+java -cp i18n-generator.jar \
+  dev.marcosalmeida.i18n.generator.SubdivisionCodeGenerator \
+  ./data ./target/generated-sources/java
+```
+
+Either way the result is written to
+`<output-dir>/dev/marcosalmeida/i18n/SubdivisionCode.java`.
+
 ## Deployment
+
+Both `i18n` and `i18n-generator` are published to Maven Central and are always released at the
+same version, because `i18n` declares `i18n-generator` as a dependency at `${project.version}`.
+Releasing one without the other leaves that dependency unresolvable.
 
 Artifacts are signed with GPG as required by Sonatype Central. To deploy, use:
 
 ```bash
-mvn deploy -P deployment
+mvn deploy -P deployment -pl library,generator
 ```
 
 Ensure your GPG key is configured correctly in your environment.
+
+Publishing plugins are confined to the `deployment` profile so that an ordinary `mvn verify`
+never has to resolve them.

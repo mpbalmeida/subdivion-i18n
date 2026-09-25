@@ -8,8 +8,45 @@ import java.nio.file.*;
 import java.util.*;
 import java.util.stream.*;
 
+/**
+ * Generates the {@code SubdivisionCode} source file from the ISO-3166-2 JSON data files.
+ *
+ * <p>The generator walks a data directory recursively, parses every {@code *.json} file into a
+ * {@link CountryData}, validates it, and emits a single Java source file containing one nested
+ * enum per country plus the {@code SubdivisionCode} wrapper with its lookup and filtering
+ * methods.
+ *
+ * <p>Countries are emitted in alphabetical order by ISO 3166-1 alpha-2 code, and subdivisions
+ * within each country keep the order they appear in the data file. Every country file is
+ * validated before any output is written; the first problem found aborts the run with an
+ * {@link IllegalArgumentException} naming the offending file.
+ *
+ * <p>Typical invocation, as wired into {@code library/pom.xml} via {@code exec-maven-plugin}:
+ * <pre>{@code
+ * java -cp i18n-generator.jar \
+ *   dev.marcosalmeida.i18n.generator.SubdivisionCodeGenerator \
+ *   ./data ./target/generated-sources/java
+ * }</pre>
+ *
+ * <p>The output is written to
+ * {@code <output-dir>/dev/marcosalmeida/i18n/SubdivisionCode.java}, with intermediate
+ * directories created as needed. This class is a build-time tool and is not intended to be
+ * used at runtime.
+ */
 public class SubdivisionCodeGenerator {
 
+    /** Static-only utility: not intended to be instantiated. */
+    private SubdivisionCodeGenerator() {}
+
+    /**
+     * Runs the generator.
+     *
+     * @param args exactly two arguments: the data directory to read and the output directory
+     *             to write the generated source into. Any other count prints usage to
+     *             {@code stderr} and exits with status 1.
+     * @throws Exception if the data directory cannot be read, a data file is invalid, or the
+     *                   output cannot be written
+     */
     public static void main(String[] args) throws Exception {
         if (args.length != 2) {
             System.err.println("Usage: SubdivisionCodeGenerator <data-dir> <output-dir>");
@@ -32,6 +69,19 @@ public class SubdivisionCodeGenerator {
         System.out.println("Generated " + outputFile + " with " + countries.size() + " countries.");
     }
 
+    /**
+     * Reads every {@code *.json} file under {@code dataDir} and validates it.
+     *
+     * <p>Rejects a data file when a required field is missing or blank, when the country code
+     * is not uppercase, when the same country code appears in two files, when a subdivision
+     * repeats a code within its country, or when a {@code parent} does not match another
+     * subdivision in the same file. The first failure aborts the run.
+     *
+     * @param dataDir root of the data tree, scanned recursively
+     * @return the parsed countries in the order their files were visited, before sorting
+     * @throws IOException if the tree cannot be walked or a file cannot be parsed
+     * @throws IllegalArgumentException if any data file fails validation
+     */
     static List<CountryData> loadAndValidate(Path dataDir) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         List<CountryData> result = new ArrayList<>();
@@ -495,6 +545,21 @@ public class SubdivisionCodeGenerator {
             Map.entry("territory", "getTerritories")
     );
 
+    /**
+     * Maps a subdivision category to the name of the generated filter method for it.
+     *
+     * <p>Irregular plurals come from {@link #CATEGORY_METHOD_NAMES}; everything else is
+     * pluralised by capitalising each word and appending {@code "s"}, with a consonant
+     * followed by {@code "y"} becoming {@code "ies"}. So {@code "state"} becomes
+     * {@code getStates}, {@code "autonomous region"} becomes {@code getAutonomousRegions},
+     * and {@code "federal dependency"} becomes {@code getFederalDependencies}.
+     *
+     * <p>A new category in the data therefore adds a new public method to the library, so
+     * this mapping is part of the generated API's surface.
+     *
+     * @param category the subdivision category, for example {@code "province"}
+     * @return the filter method name, for example {@code getProvinces}
+     */
     static String categoryToMethodName(String category) {
         String lower = category.toLowerCase();
         if (CATEGORY_METHOD_NAMES.containsKey(lower)) {
