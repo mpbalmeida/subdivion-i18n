@@ -1,0 +1,18 @@
+{
+  "country": "BO",
+  "name": "Bolivia",
+  "wikipedia": "https://en.wikipedia.org/wiki/ISO_3166-2:BO",
+  "dateAdded": "2026-09-25",
+  "lastUpdated": "2026-09-25",
+  "subdivisions": [
+    {"code": "B", "name": "El Beni", "category": "department"},
+    {"code": "C", "name": "Cochabamba", "category": "department"},
+    {"code": "H", "name": "Chuquisaca", "category": "department"},
+    {"code": "L", "name": "La Paz", "category": "department"},
+    {"code": "N", "name": "Pando", "category": "department"},
+    {"code": "O", "name": "Oruro", "category": "department"},
+    {"code": "P", "name": "Potosí", "category": "department"},
+    {"code": "S", "name": "Santa Cruz", "category": "department"},
+    {"code": "T", "name": "Tarija", "category": "department"}
+  ]
+}
