@@ -1,0 +1,28 @@
+{
+  "country": "UY",
+  "name": "Uruguay",
+  "wikipedia": "https://en.wikipedia.org/wiki/ISO_3166-2:UY",
+  "dateAdded": "2026-09-25",
+  "lastUpdated": "2026-09-25",
+  "subdivisions": [
+    {"code": "AR", "name": "Artigas", "category": "department"},
+    {"code": "CA", "name": "Canelones", "category": "department"},
+    {"code": "CL", "name": "Cerro Largo", "category": "department"},
+    {"code": "CO", "name": "Colonia", "category": "department"},
+    {"code": "DU", "name": "Durazno", "category": "department"},
+    {"code": "FD", "name": "Florida", "category": "department"},
+    {"code": "FS", "name": "Flores", "category": "department"},
+    {"code": "LA", "name": "Lavalleja", "category": "department"},
+    {"code": "MA", "name": "Maldonado", "category": "department"},
+    {"code": "MO", "name": "Montevideo", "category": "department"},
+    {"code": "PA", "name": "Paysandú", "category": "department"},
+    {"code": "RN", "name": "Río Negro", "category": "department"},
+    {"code": "RO", "name": "Rocha", "category": "department"},
+    {"code": "RV", "name": "Rivera", "category": "department"},
+    {"code": "SA", "name": "Salto", "category": "department"},
+    {"code": "SJ", "name": "San José", "category": "department"},
+    {"code": "SO", "name": "Soriano", "category": "department"},
+    {"code": "TA", "name": "Tacuarembó", "category": "department"},
+    {"code": "TT", "name": "Treinta y Tres", "category": "department"}
+  ]
+}
