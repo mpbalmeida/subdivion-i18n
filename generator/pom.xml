@@ -12,6 +12,10 @@
 
     <artifactId>i18n-generator</artifactId>
     <name>i18n Code Generator</name>
+    <description>Build-time code generator that turns ISO-3166-2 subdivision JSON data into the SubdivisionCode enums used by the i18n library.</description>
+    <!-- Declared explicitly: flatten-maven-plugin appends the artifactId to an
+         inherited <url>, which would publish a 404 link to Maven Central. -->
+    <url>https://github.com/mpbalmeida/subdivion-i18n</url>
 
     <dependencies>
         <dependency>
