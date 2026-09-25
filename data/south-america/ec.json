@@ -1,0 +1,33 @@
+{
+  "country": "EC",
+  "name": "Ecuador",
+  "wikipedia": "https://en.wikipedia.org/wiki/ISO_3166-2:EC",
+  "dateAdded": "2026-09-25",
+  "lastUpdated": "2026-09-25",
+  "subdivisions": [
+    {"code": "A", "name": "Azuay", "category": "province"},
+    {"code": "B", "name": "Bolívar", "category": "province"},
+    {"code": "C", "name": "Carchi", "category": "province"},
+    {"code": "D", "name": "Orellana", "category": "province"},
+    {"code": "E", "name": "Esmeraldas", "category": "province"},
+    {"code": "F", "name": "Cañar", "category": "province"},
+    {"code": "G", "name": "Guayas", "category": "province"},
+    {"code": "H", "name": "Chimborazo", "category": "province"},
+    {"code": "I", "name": "Imbabura", "category": "province"},
+    {"code": "L", "name": "Loja", "category": "province"},
+    {"code": "M", "name": "Manabí", "category": "province"},
+    {"code": "N", "name": "Napo", "category": "province"},
+    {"code": "O", "name": "El Oro", "category": "province"},
+    {"code": "P", "name": "Pichincha", "category": "province"},
+    {"code": "R", "name": "Los Ríos", "category": "province"},
+    {"code": "S", "name": "Morona Santiago", "category": "province"},
+    {"code": "SD", "name": "Santo Domingo de los Tsáchilas", "category": "province"},
+    {"code": "SE", "name": "Santa Elena", "category": "province"},
+    {"code": "T", "name": "Tungurahua", "category": "province"},
+    {"code": "U", "name": "Sucumbíos", "category": "province"},
+    {"code": "W", "name": "Galápagos", "category": "province"},
+    {"code": "X", "name": "Cotopaxi", "category": "province"},
+    {"code": "Y", "name": "Pastaza", "category": "province"},
+    {"code": "Z", "name": "Zamora Chinchipe", "category": "province"}
+  ]
+}
