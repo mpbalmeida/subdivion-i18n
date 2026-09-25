@@ -1,0 +1,27 @@
+{
+  "country": "HN",
+  "name": "Honduras",
+  "wikipedia": "https://en.wikipedia.org/wiki/ISO_3166-2:HN",
+  "dateAdded": "2026-09-25",
+  "lastUpdated": "2026-09-25",
+  "subdivisions": [
+    {"code": "AT", "name": "Atlántida", "category": "department"},
+    {"code": "CH", "name": "Choluteca", "category": "department"},
+    {"code": "CL", "name": "Colón", "category": "department"},
+    {"code": "CM", "name": "Comayagua", "category": "department"},
+    {"code": "CP", "name": "Copán", "category": "department"},
+    {"code": "CR", "name": "Cortés", "category": "department"},
+    {"code": "EP", "name": "El Paraíso", "category": "department"},
+    {"code": "FM", "name": "Francisco Morazán", "category": "department"},
+    {"code": "GD", "name": "Gracias a Dios", "category": "department"},
+    {"code": "IB", "name": "Islas de la Bahía", "category": "department"},
+    {"code": "IN", "name": "Intibucá", "category": "department"},
+    {"code": "LE", "name": "Lempira", "category": "department"},
+    {"code": "LP", "name": "La Paz", "category": "department"},
+    {"code": "OC", "name": "Ocotepeque", "category": "department"},
+    {"code": "OL", "name": "Olancho", "category": "department"},
+    {"code": "SB", "name": "Santa Bárbara", "category": "department"},
+    {"code": "VA", "name": "Valle", "category": "department"},
+    {"code": "YO", "name": "Yoro", "category": "department"}
+  ]
+}
