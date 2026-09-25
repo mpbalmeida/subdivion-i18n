@@ -1,0 +1,27 @@
+{
+  "country": "PY",
+  "name": "Paraguay",
+  "wikipedia": "https://en.wikipedia.org/wiki/ISO_3166-2:PY",
+  "dateAdded": "2026-09-25",
+  "lastUpdated": "2026-09-25",
+  "subdivisions": [
+    {"code": "1", "name": "Concepción", "category": "department"},
+    {"code": "2", "name": "San Pedro", "category": "department"},
+    {"code": "3", "name": "Cordillera", "category": "department"},
+    {"code": "4", "name": "Guairá", "category": "department"},
+    {"code": "5", "name": "Caaguazú", "category": "department"},
+    {"code": "6", "name": "Caazapá", "category": "department"},
+    {"code": "7", "name": "Itapúa", "category": "department"},
+    {"code": "8", "name": "Misiones", "category": "department"},
+    {"code": "9", "name": "Paraguarí", "category": "department"},
+    {"code": "10", "name": "Alto Paraná", "category": "department"},
+    {"code": "11", "name": "Central", "category": "department"},
+    {"code": "12", "name": "Ñeembucú", "category": "department"},
+    {"code": "13", "name": "Amambay", "category": "department"},
+    {"code": "14", "name": "Canindeyú", "category": "department"},
+    {"code": "15", "name": "Presidente Hayes", "category": "department"},
+    {"code": "16", "name": "Alto Paraguay", "category": "department"},
+    {"code": "19", "name": "Boquerón", "category": "department"},
+    {"code": "ASU", "name": "Asunción", "category": "capital"}
+  ]
+}
