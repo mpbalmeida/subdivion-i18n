@@ -1,0 +1,19 @@
+{
+  "country": "GY",
+  "name": "Guyana",
+  "wikipedia": "https://en.wikipedia.org/wiki/ISO_3166-2:GY",
+  "dateAdded": "2026-09-25",
+  "lastUpdated": "2026-09-25",
+  "subdivisions": [
+    {"code": "BA", "name": "Barima-Waini", "category": "region"},
+    {"code": "CU", "name": "Cuyuni-Mazaruni", "category": "region"},
+    {"code": "DE", "name": "Demerara-Mahaica", "category": "region"},
+    {"code": "EB", "name": "East Berbice-Corentyne", "category": "region"},
+    {"code": "ES", "name": "Essequibo Islands-West Demerara", "category": "region"},
+    {"code": "MA", "name": "Mahaica-Berbice", "category": "region"},
+    {"code": "PM", "name": "Pomeroon-Supenaam", "category": "region"},
+    {"code": "PT", "name": "Potaro-Siparuni", "category": "region"},
+    {"code": "UD", "name": "Upper Demerara-Berbice", "category": "region"},
+    {"code": "UT", "name": "Upper Takutu-Upper Essequibo", "category": "region"}
+  ]
+}
