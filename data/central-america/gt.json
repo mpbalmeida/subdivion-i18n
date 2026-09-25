@@ -1,0 +1,31 @@
+{
+  "country": "GT",
+  "name": "Guatemala",
+  "wikipedia": "https://en.wikipedia.org/wiki/ISO_3166-2:GT",
+  "dateAdded": "2026-09-25",
+  "lastUpdated": "2026-09-25",
+  "subdivisions": [
+    {"code": "01", "name": "Guatemala", "category": "department"},
+    {"code": "02", "name": "El Progreso", "category": "department"},
+    {"code": "03", "name": "Sacatepéquez", "category": "department"},
+    {"code": "04", "name": "Chimaltenango", "category": "department"},
+    {"code": "05", "name": "Escuintla", "category": "department"},
+    {"code": "06", "name": "Santa Rosa", "category": "department"},
+    {"code": "07", "name": "Sololá", "category": "department"},
+    {"code": "08", "name": "Totonicapán", "category": "department"},
+    {"code": "09", "name": "Quetzaltenango", "category": "department"},
+    {"code": "10", "name": "Suchitepéquez", "category": "department"},
+    {"code": "11", "name": "Retalhuleu", "category": "department"},
+    {"code": "12", "name": "San Marcos", "category": "department"},
+    {"code": "13", "name": "Huehuetenango", "category": "department"},
+    {"code": "14", "name": "Quiché", "category": "department"},
+    {"code": "15", "name": "Baja Verapaz", "category": "department"},
+    {"code": "16", "name": "Alta Verapaz", "category": "department"},
+    {"code": "17", "name": "Petén", "category": "department"},
+    {"code": "18", "name": "Izabal", "category": "department"},
+    {"code": "19", "name": "Zacapa", "category": "department"},
+    {"code": "20", "name": "Chiquimula", "category": "department"},
+    {"code": "21", "name": "Jalapa", "category": "department"},
+    {"code": "22", "name": "Jutiapa", "category": "department"}
+  ]
+}

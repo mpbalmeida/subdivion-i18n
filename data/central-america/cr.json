@@ -1,0 +1,16 @@
+{
+  "country": "CR",
+  "name": "Costa Rica",
+  "wikipedia": "https://en.wikipedia.org/wiki/ISO_3166-2:CR",
+  "dateAdded": "2026-09-25",
+  "lastUpdated": "2026-09-25",
+  "subdivisions": [
+    {"code": "A", "name": "Alajuela", "category": "province"},
+    {"code": "C", "name": "Cartago", "category": "province"},
+    {"code": "G", "name": "Guanacaste", "category": "province"},
+    {"code": "H", "name": "Heredia", "category": "province"},
+    {"code": "L", "name": "Limón", "category": "province"},
+    {"code": "P", "name": "Puntarenas", "category": "province"},
+    {"code": "SJ", "name": "San José", "category": "province"}
+  ]
+}

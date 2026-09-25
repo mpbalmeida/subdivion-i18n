@@ -1,0 +1,15 @@
+{
+  "country": "BZ",
+  "name": "Belize",
+  "wikipedia": "https://en.wikipedia.org/wiki/ISO_3166-2:BZ",
+  "dateAdded": "2026-09-25",
+  "lastUpdated": "2026-09-25",
+  "subdivisions": [
+    {"code": "BZ", "name": "Belize", "category": "district"},
+    {"code": "CY", "name": "Cayo", "category": "district"},
+    {"code": "CZL", "name": "Corozal", "category": "district"},
+    {"code": "OW", "name": "Orange Walk", "category": "district"},
+    {"code": "SC", "name": "Stann Creek", "category": "district"},
+    {"code": "TOL", "name": "Toledo", "category": "district"}
+  ]
+}

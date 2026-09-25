@@ -1,0 +1,23 @@
+{
+  "country": "PA",
+  "name": "Panama",
+  "wikipedia": "https://en.wikipedia.org/wiki/ISO_3166-2:PA",
+  "dateAdded": "2026-09-25",
+  "lastUpdated": "2026-09-25",
+  "subdivisions": [
+    {"code": "1", "name": "Bocas del Toro", "category": "province"},
+    {"code": "2", "name": "Coclé", "category": "province"},
+    {"code": "3", "name": "Colón", "category": "province"},
+    {"code": "4", "name": "Chiriquí", "category": "province"},
+    {"code": "5", "name": "Darién", "category": "province"},
+    {"code": "6", "name": "Herrera", "category": "province"},
+    {"code": "7", "name": "Los Santos", "category": "province"},
+    {"code": "8", "name": "Panamá", "category": "province"},
+    {"code": "9", "name": "Veraguas", "category": "province"},
+    {"code": "10", "name": "Panamá Oeste", "category": "province"},
+    {"code": "EM", "name": "Emberá", "category": "indigenous region"},
+    {"code": "KY", "name": "Guna Yala", "category": "indigenous region"},
+    {"code": "NB", "name": "Ngäbe-Buglé", "category": "indigenous region"},
+    {"code": "NT", "name": "Naso Tjër Di", "category": "indigenous region"}
+  ]
+}

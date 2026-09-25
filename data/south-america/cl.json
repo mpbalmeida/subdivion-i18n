@@ -1,0 +1,25 @@
+{
+  "country": "CL",
+  "name": "Chile",
+  "wikipedia": "https://en.wikipedia.org/wiki/ISO_3166-2:CL",
+  "dateAdded": "2026-09-25",
+  "lastUpdated": "2026-09-25",
+  "subdivisions": [
+    {"code": "AI", "name": "Aysén del General Carlos Ibáñez del Campo", "category": "region"},
+    {"code": "AN", "name": "Antofagasta", "category": "region"},
+    {"code": "AP", "name": "Arica y Parinacota", "category": "region"},
+    {"code": "AR", "name": "La Araucanía", "category": "region"},
+    {"code": "AT", "name": "Atacama", "category": "region"},
+    {"code": "BI", "name": "Biobío", "category": "region"},
+    {"code": "CO", "name": "Coquimbo", "category": "region"},
+    {"code": "LI", "name": "Libertador General Bernardo O'Higgins", "category": "region"},
+    {"code": "LL", "name": "Los Lagos", "category": "region"},
+    {"code": "LR", "name": "Los Ríos", "category": "region"},
+    {"code": "MA", "name": "Magallanes", "category": "region"},
+    {"code": "ML", "name": "Maule", "category": "region"},
+    {"code": "NB", "name": "Ñuble", "category": "region"},
+    {"code": "RM", "name": "Región Metropolitana de Santiago", "category": "region"},
+    {"code": "TA", "name": "Tarapacá", "category": "region"},
+    {"code": "VS", "name": "Valparaíso", "category": "region"}
+  ]
+}

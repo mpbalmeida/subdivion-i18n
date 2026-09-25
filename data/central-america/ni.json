@@ -1,0 +1,26 @@
+{
+  "country": "NI",
+  "name": "Nicaragua",
+  "wikipedia": "https://en.wikipedia.org/wiki/ISO_3166-2:NI",
+  "dateAdded": "2026-09-25",
+  "lastUpdated": "2026-09-25",
+  "subdivisions": [
+    {"code": "AN", "name": "Costa Caribe Norte", "category": "autonomous region"},
+    {"code": "AS", "name": "Costa Caribe Sur", "category": "autonomous region"},
+    {"code": "BO", "name": "Boaco", "category": "department"},
+    {"code": "CA", "name": "Carazo", "category": "department"},
+    {"code": "CI", "name": "Chinandega", "category": "department"},
+    {"code": "CO", "name": "Chontales", "category": "department"},
+    {"code": "ES", "name": "Estelí", "category": "department"},
+    {"code": "GR", "name": "Granada", "category": "department"},
+    {"code": "JI", "name": "Jinotega", "category": "department"},
+    {"code": "LE", "name": "León", "category": "department"},
+    {"code": "MD", "name": "Madriz", "category": "department"},
+    {"code": "MN", "name": "Managua", "category": "department"},
+    {"code": "MS", "name": "Masaya", "category": "department"},
+    {"code": "MT", "name": "Matagalpa", "category": "department"},
+    {"code": "NS", "name": "Nueva Segovia", "category": "department"},
+    {"code": "RI", "name": "Rivas", "category": "department"},
+    {"code": "SJ", "name": "Río San Juan", "category": "department"}
+  ]
+}
