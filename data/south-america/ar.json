@@ -1,0 +1,33 @@
+{
+  "country": "AR",
+  "name": "Argentina",
+  "wikipedia": "https://en.wikipedia.org/wiki/ISO_3166-2:AR",
+  "dateAdded": "2026-09-25",
+  "lastUpdated": "2026-09-25",
+  "subdivisions": [
+    {"code": "A", "name": "Salta", "category": "province"},
+    {"code": "B", "name": "Buenos Aires", "category": "province"},
+    {"code": "C", "name": "Ciudad Autónoma de Buenos Aires", "category": "city"},
+    {"code": "D", "name": "San Luis", "category": "province"},
+    {"code": "E", "name": "Entre Ríos", "category": "province"},
+    {"code": "F", "name": "La Rioja", "category": "province"},
+    {"code": "G", "name": "Santiago del Estero", "category": "province"},
+    {"code": "H", "name": "Chaco", "category": "province"},
+    {"code": "J", "name": "San Juan", "category": "province"},
+    {"code": "K", "name": "Catamarca", "category": "province"},
+    {"code": "L", "name": "La Pampa", "category": "province"},
+    {"code": "M", "name": "Mendoza", "category": "province"},
+    {"code": "N", "name": "Misiones", "category": "province"},
+    {"code": "P", "name": "Formosa", "category": "province"},
+    {"code": "Q", "name": "Neuquén", "category": "province"},
+    {"code": "R", "name": "Río Negro", "category": "province"},
+    {"code": "S", "name": "Santa Fe", "category": "province"},
+    {"code": "T", "name": "Tucumán", "category": "province"},
+    {"code": "U", "name": "Chubut", "category": "province"},
+    {"code": "V", "name": "Tierra del Fuego", "category": "province"},
+    {"code": "W", "name": "Corrientes", "category": "province"},
+    {"code": "X", "name": "Córdoba", "category": "province"},
+    {"code": "Y", "name": "Jujuy", "category": "province"},
+    {"code": "Z", "name": "Santa Cruz", "category": "province"}
+  ]
+}
