@@ -1,0 +1,23 @@
+{
+  "country": "SV",
+  "name": "El Salvador",
+  "wikipedia": "https://en.wikipedia.org/wiki/ISO_3166-2:SV",
+  "dateAdded": "2026-09-25",
+  "lastUpdated": "2026-09-25",
+  "subdivisions": [
+    {"code": "AH", "name": "Ahuachapán", "category": "department"},
+    {"code": "CA", "name": "Cabañas", "category": "department"},
+    {"code": "CH", "name": "Chalatenango", "category": "department"},
+    {"code": "CU", "name": "Cuscatlán", "category": "department"},
+    {"code": "LI", "name": "La Libertad", "category": "department"},
+    {"code": "MO", "name": "Morazán", "category": "department"},
+    {"code": "PA", "name": "La Paz", "category": "department"},
+    {"code": "SA", "name": "Santa Ana", "category": "department"},
+    {"code": "SM", "name": "San Miguel", "category": "department"},
+    {"code": "SO", "name": "Sonsonate", "category": "department"},
+    {"code": "SS", "name": "San Salvador", "category": "department"},
+    {"code": "SV", "name": "San Vicente", "category": "department"},
+    {"code": "UN", "name": "La Unión", "category": "department"},
+    {"code": "US", "name": "Usulután", "category": "department"}
+  ]
+}
