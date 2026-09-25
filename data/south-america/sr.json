@@ -1,0 +1,19 @@
+{
+  "country": "SR",
+  "name": "Suriname",
+  "wikipedia": "https://en.wikipedia.org/wiki/ISO_3166-2:SR",
+  "dateAdded": "2026-09-25",
+  "lastUpdated": "2026-09-25",
+  "subdivisions": [
+    {"code": "BR", "name": "Brokopondo", "category": "district"},
+    {"code": "CM", "name": "Commewijne", "category": "district"},
+    {"code": "CR", "name": "Coronie", "category": "district"},
+    {"code": "MA", "name": "Marowijne", "category": "district"},
+    {"code": "NI", "name": "Nickerie", "category": "district"},
+    {"code": "PM", "name": "Paramaribo", "category": "district"},
+    {"code": "PR", "name": "Para", "category": "district"},
+    {"code": "SA", "name": "Saramacca", "category": "district"},
+    {"code": "SI", "name": "Sipaliwini", "category": "district"},
+    {"code": "WA", "name": "Wanica", "category": "district"}
+  ]
+}
