@@ -32,6 +32,15 @@ jobs:
         if: github.event_name == 'pull_request'
         run: |
           COMMIT="${{ github.event.pull_request.head.sha }}"
+          # A PR head can legitimately be a merge commit - for example when a stacked PR
+          # merges into the branch this PR is based on, or when the branch author merges
+          # main in. Merge commits carry a "Merge pull request #N"/"Merge branch ..."
+          # subject that is not a Conventional Commit, so they are excluded here, matching
+          # how release.yml filters its commit range with --no-merges.
+          if git rev-parse -q --verify "$COMMIT^2" >/dev/null; then
+            echo "Head commit is a merge commit; skipping conventional-commit check."
+            exit 0
+          fi
           git log -1 --pretty=format:"%s" "$COMMIT" > latest_commit_msg.txt
           ./scripts/commit-msg.sh latest_commit_msg.txt
 
